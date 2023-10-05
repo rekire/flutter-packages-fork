@@ -1,3 +1,7 @@
+## 3.13.0
+
+* Add support to show JavaScript dialog. See `PlatformWebViewController.setJavaScriptAlertDialogCallback`, `PlatformWebViewController.setJavaScriptConfirmDialogCallback` and `PlatformWebViewController.setJavaScriptTextInputDialogCallback`.
+
 ## 3.12.1
 
 * Fixes `use_build_context_synchronously` lint violations in the example app.
