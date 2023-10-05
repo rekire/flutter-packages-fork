@@ -1,3 +1,6 @@
+## 3.10.0
+* Adds support to show JavaScript dialog. See `PlatformWebViewController.setOnJavaScriptAlertDialog`, `PlatformWebViewController.setOnJavaScriptConfirmDialog` and `PlatformWebViewController.setOnJavaScriptTextInputDialog`.
+
 ## NEXT
 
 * Updates minimum supported SDK version to Flutter 3.10/Dart 3.0.
@@ -26,6 +29,7 @@
 ## 3.8.0
 
 * Adds support to register a callback to receive JavaScript console messages. See `WebKitWebViewController.setOnConsoleMessage`.
+
 
 ## 3.7.4
 
