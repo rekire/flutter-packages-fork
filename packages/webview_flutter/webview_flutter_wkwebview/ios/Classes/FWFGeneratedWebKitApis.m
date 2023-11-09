@@ -269,12 +269,6 @@ static id GetNullableObjectAtIndex(NSArray *array, NSInteger key) {
 - (NSArray *)toList;
 @end
 
-@interface FWFWKJavaScriptPanelData ()
-+ (FWFWKJavaScriptPanelData *)fromList:(NSArray *)list;
-+ (nullable FWFWKJavaScriptPanelData *)nullableFromList:(NSArray *)list;
-- (NSArray *)toList;
-@end
-
 @interface FWFNSHttpCookieData ()
 + (FWFNSHttpCookieData *)fromList:(NSArray *)list;
 + (nullable FWFNSHttpCookieData *)nullableFromList:(NSArray *)list;
@@ -667,35 +661,6 @@ static id GetNullableObjectAtIndex(NSArray *array, NSInteger key) {
     self.host ?: [NSNull null],
     @(self.port),
     self.protocol ?: [NSNull null],
-  ];
-}
-@end
-
-@implementation FWFWKJavaScriptPanelData
-+ (instancetype)makeWithMessage:(NSString *)message
-    url:(NSString *)url
-    defaultText:(nullable NSString *)defaultText {
-  FWFWKJavaScriptPanelData* pigeonResult = [[FWFWKJavaScriptPanelData alloc] init];
-  pigeonResult.message = message;
-  pigeonResult.url = url;
-  pigeonResult.defaultText = defaultText;
-  return pigeonResult;
-}
-+ (FWFWKJavaScriptPanelData *)fromList:(NSArray *)list {
-  FWFWKJavaScriptPanelData *pigeonResult = [[FWFWKJavaScriptPanelData alloc] init];
-  pigeonResult.message = GetNullableObjectAtIndex(list, 0);
-  pigeonResult.url = GetNullableObjectAtIndex(list, 1);
-  pigeonResult.defaultText = GetNullableObjectAtIndex(list, 2);
-  return pigeonResult;
-}
-+ (nullable FWFWKJavaScriptPanelData *)nullableFromList:(NSArray *)list {
-  return (list) ? [FWFWKJavaScriptPanelData fromList:list] : nil;
-}
-- (NSArray *)toList {
-  return @[
-    self.message ?: [NSNull null],
-    self.url ?: [NSNull null],
-    self.defaultText ?: [NSNull null],
   ];
 }
 @end
@@ -1967,24 +1932,22 @@ NSObject<FlutterMessageCodec> *FWFNSObjectFlutterApiGetCodec(void) {
     case 136: 
       return [FWFWKFrameInfoData fromList:[self readValue]];
     case 137: 
-      return [FWFWKJavaScriptPanelData fromList:[self readValue]];
-    case 138: 
       return [FWFWKMediaCaptureTypeData fromList:[self readValue]];
-    case 139: 
+    case 138: 
       return [FWFWKNavigationActionData fromList:[self readValue]];
-    case 140: 
+    case 139: 
       return [FWFWKNavigationActionPolicyEnumData fromList:[self readValue]];
-    case 141: 
+    case 140: 
       return [FWFWKPermissionDecisionData fromList:[self readValue]];
-    case 142: 
+    case 141: 
       return [FWFWKScriptMessageData fromList:[self readValue]];
-    case 143: 
+    case 142: 
       return [FWFWKSecurityOriginData fromList:[self readValue]];
-    case 144: 
+    case 143: 
       return [FWFWKUserScriptData fromList:[self readValue]];
-    case 145: 
+    case 144: 
       return [FWFWKUserScriptInjectionTimeEnumData fromList:[self readValue]];
-    case 146: 
+    case 145: 
       return [FWFWKWebsiteDataTypeEnumData fromList:[self readValue]];
     default:
       return [super readValueOfType:type];
@@ -2023,35 +1986,32 @@ NSObject<FlutterMessageCodec> *FWFNSObjectFlutterApiGetCodec(void) {
   } else if ([value isKindOfClass:[FWFWKFrameInfoData class]]) {
     [self writeByte:136];
     [self writeValue:[value toList]];
-  } else if ([value isKindOfClass:[FWFWKJavaScriptPanelData class]]) {
+  } else if ([value isKindOfClass:[FWFWKMediaCaptureTypeData class]]) {
     [self writeByte:137];
     [self writeValue:[value toList]];
-  } else if ([value isKindOfClass:[FWFWKMediaCaptureTypeData class]]) {
+  } else if ([value isKindOfClass:[FWFWKNavigationActionData class]]) {
     [self writeByte:138];
     [self writeValue:[value toList]];
-  } else if ([value isKindOfClass:[FWFWKNavigationActionData class]]) {
+  } else if ([value isKindOfClass:[FWFWKNavigationActionPolicyEnumData class]]) {
     [self writeByte:139];
     [self writeValue:[value toList]];
-  } else if ([value isKindOfClass:[FWFWKNavigationActionPolicyEnumData class]]) {
+  } else if ([value isKindOfClass:[FWFWKPermissionDecisionData class]]) {
     [self writeByte:140];
     [self writeValue:[value toList]];
-  } else if ([value isKindOfClass:[FWFWKPermissionDecisionData class]]) {
+  } else if ([value isKindOfClass:[FWFWKScriptMessageData class]]) {
     [self writeByte:141];
     [self writeValue:[value toList]];
-  } else if ([value isKindOfClass:[FWFWKScriptMessageData class]]) {
+  } else if ([value isKindOfClass:[FWFWKSecurityOriginData class]]) {
     [self writeByte:142];
     [self writeValue:[value toList]];
-  } else if ([value isKindOfClass:[FWFWKSecurityOriginData class]]) {
+  } else if ([value isKindOfClass:[FWFWKUserScriptData class]]) {
     [self writeByte:143];
     [self writeValue:[value toList]];
-  } else if ([value isKindOfClass:[FWFWKUserScriptData class]]) {
+  } else if ([value isKindOfClass:[FWFWKUserScriptInjectionTimeEnumData class]]) {
     [self writeByte:144];
     [self writeValue:[value toList]];
-  } else if ([value isKindOfClass:[FWFWKUserScriptInjectionTimeEnumData class]]) {
-    [self writeByte:145];
-    [self writeValue:[value toList]];
   } else if ([value isKindOfClass:[FWFWKWebsiteDataTypeEnumData class]]) {
-    [self writeByte:146];
+    [self writeByte:145];
     [self writeValue:[value toList]];
   } else {
     [super writeValue:value];
@@ -2512,14 +2472,12 @@ void SetUpFWFWKUIDelegateHostApi(id<FlutterBinaryMessenger> binaryMessenger, NSO
     case 129: 
       return [FWFWKFrameInfoData fromList:[self readValue]];
     case 130: 
-      return [FWFWKJavaScriptPanelData fromList:[self readValue]];
-    case 131: 
       return [FWFWKMediaCaptureTypeData fromList:[self readValue]];
-    case 132: 
+    case 131: 
       return [FWFWKNavigationActionData fromList:[self readValue]];
-    case 133: 
+    case 132: 
       return [FWFWKPermissionDecisionData fromList:[self readValue]];
-    case 134: 
+    case 133: 
       return [FWFWKSecurityOriginData fromList:[self readValue]];
     default:
       return [super readValueOfType:type];
@@ -2537,20 +2495,17 @@ void SetUpFWFWKUIDelegateHostApi(id<FlutterBinaryMessenger> binaryMessenger, NSO
   } else if ([value isKindOfClass:[FWFWKFrameInfoData class]]) {
     [self writeByte:129];
     [self writeValue:[value toList]];
-  } else if ([value isKindOfClass:[FWFWKJavaScriptPanelData class]]) {
+  } else if ([value isKindOfClass:[FWFWKMediaCaptureTypeData class]]) {
     [self writeByte:130];
     [self writeValue:[value toList]];
-  } else if ([value isKindOfClass:[FWFWKMediaCaptureTypeData class]]) {
+  } else if ([value isKindOfClass:[FWFWKNavigationActionData class]]) {
     [self writeByte:131];
     [self writeValue:[value toList]];
-  } else if ([value isKindOfClass:[FWFWKNavigationActionData class]]) {
+  } else if ([value isKindOfClass:[FWFWKPermissionDecisionData class]]) {
     [self writeByte:132];
     [self writeValue:[value toList]];
-  } else if ([value isKindOfClass:[FWFWKPermissionDecisionData class]]) {
-    [self writeByte:133];
-    [self writeValue:[value toList]];
   } else if ([value isKindOfClass:[FWFWKSecurityOriginData class]]) {
-    [self writeByte:134];
+    [self writeByte:133];
     [self writeValue:[value toList]];
   } else {
     [super writeValue:value];
@@ -2629,13 +2584,13 @@ NSObject<FlutterMessageCodec> *FWFWKUIDelegateFlutterApiGetCodec(void) {
     } 
   }];
 }
-- (void)runJavaScriptAlertPanelForDelegateWithIdentifier:(NSInteger)arg_identifier data:(FWFWKJavaScriptPanelData *)arg_data completion:(void (^)(FlutterError *_Nullable))completion {
+- (void)runJavaScriptAlertPanelForDelegateWithIdentifier:(NSInteger)arg_identifier message:(NSString *)arg_message frame:(FWFWKFrameInfoData *)arg_frame completion:(void (^)(FlutterError *_Nullable))completion {
   FlutterBasicMessageChannel *channel =
     [FlutterBasicMessageChannel
       messageChannelWithName:@"dev.flutter.pigeon.webview_flutter_wkwebview.WKUIDelegateFlutterApi.runJavaScriptAlertPanel"
       binaryMessenger:self.binaryMessenger
       codec:FWFWKUIDelegateFlutterApiGetCodec()];
-  [channel sendMessage:@[@(arg_identifier), arg_data ?: [NSNull null]] reply:^(NSArray<id> *reply) {
+  [channel sendMessage:@[@(arg_identifier), arg_message ?: [NSNull null], arg_frame ?: [NSNull null]] reply:^(NSArray<id> *reply) {
     if (reply != nil) {
       if (reply.count > 1) {
         completion([FlutterError errorWithCode:reply[0] message:reply[1] details:reply[2]]);
@@ -2647,13 +2602,13 @@ NSObject<FlutterMessageCodec> *FWFWKUIDelegateFlutterApiGetCodec(void) {
     } 
   }];
 }
-- (void)runJavaScriptConfirmPanelForDelegateWithIdentifier:(NSInteger)arg_identifier data:(FWFWKJavaScriptPanelData *)arg_data completion:(void (^)(NSNumber *_Nullable, FlutterError *_Nullable))completion {
+- (void)runJavaScriptConfirmPanelForDelegateWithIdentifier:(NSInteger)arg_identifier message:(NSString *)arg_message frame:(FWFWKFrameInfoData *)arg_frame completion:(void (^)(NSNumber *_Nullable, FlutterError *_Nullable))completion {
   FlutterBasicMessageChannel *channel =
     [FlutterBasicMessageChannel
       messageChannelWithName:@"dev.flutter.pigeon.webview_flutter_wkwebview.WKUIDelegateFlutterApi.runJavaScriptConfirmPanel"
       binaryMessenger:self.binaryMessenger
       codec:FWFWKUIDelegateFlutterApiGetCodec()];
-  [channel sendMessage:@[@(arg_identifier), arg_data ?: [NSNull null]] reply:^(NSArray<id> *reply) {
+  [channel sendMessage:@[@(arg_identifier), arg_message ?: [NSNull null], arg_frame ?: [NSNull null]] reply:^(NSArray<id> *reply) {
     if (reply != nil) {
       if (reply.count > 1) {
         completion(nil, [FlutterError errorWithCode:reply[0] message:reply[1] details:reply[2]]);
@@ -2666,13 +2621,13 @@ NSObject<FlutterMessageCodec> *FWFWKUIDelegateFlutterApiGetCodec(void) {
     } 
   }];
 }
-- (void)runJavaScriptTextInputPanelForDelegateWithIdentifier:(NSInteger)arg_identifier data:(FWFWKJavaScriptPanelData *)arg_data completion:(void (^)(NSString *_Nullable, FlutterError *_Nullable))completion {
+- (void)runJavaScriptTextInputPanelForDelegateWithIdentifier:(NSInteger)arg_identifier prompt:(NSString *)arg_prompt defaultText:(NSString *)arg_defaultText frame:(FWFWKFrameInfoData *)arg_frame completion:(void (^)(NSString *_Nullable, FlutterError *_Nullable))completion {
   FlutterBasicMessageChannel *channel =
     [FlutterBasicMessageChannel
       messageChannelWithName:@"dev.flutter.pigeon.webview_flutter_wkwebview.WKUIDelegateFlutterApi.runJavaScriptTextInputPanel"
       binaryMessenger:self.binaryMessenger
       codec:FWFWKUIDelegateFlutterApiGetCodec()];
-  [channel sendMessage:@[@(arg_identifier), arg_data ?: [NSNull null]] reply:^(NSArray<id> *reply) {
+  [channel sendMessage:@[@(arg_identifier), arg_prompt ?: [NSNull null], arg_defaultText ?: [NSNull null], arg_frame ?: [NSNull null]] reply:^(NSArray<id> *reply) {
     if (reply != nil) {
       if (reply.count > 1) {
         completion(nil, [FlutterError errorWithCode:reply[0] message:reply[1] details:reply[2]]);

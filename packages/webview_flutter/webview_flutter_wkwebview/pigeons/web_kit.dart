@@ -319,12 +319,6 @@ class WKSecurityOriginData {
   late String protocol;
 }
 
-class WKJavaScriptPanelData {
-  late String message;
-  late String url;
-  late String? defaultText;
-}
-
 /// Mirror of NSHttpCookieData.
 ///
 /// See https://developer.apple.com/documentation/foundation/nshttpcookie?language=objc.
@@ -747,32 +741,36 @@ abstract class WKUIDelegateFlutterApi {
 
   /// Callback to Dart function `WKUIDelegate.runJavaScriptAlertPanel`.
   @ObjCSelector(
-    'runJavaScriptAlertPanelForDelegateWithIdentifier:data:',
+    'runJavaScriptAlertPanelForDelegateWithIdentifier:message:frame:',
   )
   @async
   void runJavaScriptAlertPanel(
       int identifier,
-      WKJavaScriptPanelData data,
+      String message,
+      WKFrameInfoData frame,
       );
 
   /// Callback to Dart function `WKUIDelegate.runJavaScriptConfirmPanel`.
   @ObjCSelector(
-    'runJavaScriptConfirmPanelForDelegateWithIdentifier:data:',
+    'runJavaScriptConfirmPanelForDelegateWithIdentifier:message:frame:',
   )
   @async
   bool runJavaScriptConfirmPanel(
       int identifier,
-      WKJavaScriptPanelData data,
+      String message,
+      WKFrameInfoData frame,
       );
 
   /// Callback to Dart function `WKUIDelegate.runJavaScriptTextInputPanel`.
   @ObjCSelector(
-    'runJavaScriptTextInputPanelForDelegateWithIdentifier:data:',
+    'runJavaScriptTextInputPanelForDelegateWithIdentifier:prompt:defaultText:frame:',
   )
   @async
   String runJavaScriptTextInputPanel(
       int identifier,
-      WKJavaScriptPanelData data,
+      String prompt,
+      String defaultText,
+      WKFrameInfoData frame,
       );
 }
 

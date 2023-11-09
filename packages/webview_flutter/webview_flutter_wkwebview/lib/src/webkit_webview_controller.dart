@@ -223,39 +223,39 @@ class WebKitWebViewController extends PlatformWebViewController {
           return decisionCompleter.future;
         }
       },
-      runJavaScriptAlertDialog: (WKJavaScriptPanelData data) async {
+      runJavaScriptAlertDialog: (String message, WKFrameInfo frame) async {
         final Future<void> Function(JavaScriptAlertDialogRequest request)?
             callback = weakThis.target?._onJavaScriptAlertDialog;
         if (callback != null) {
           final JavaScriptAlertDialogRequest request =
               JavaScriptAlertDialogRequest(
-                  message: data.message, url: data.url);
+                  message: message, url: "");
           await callback.call(request);
           return;
         }
       },
-      runJavaScriptConfirmDialog: (WKJavaScriptPanelData data) async {
+      runJavaScriptConfirmDialog: (String message, WKFrameInfo frame) async {
         final Future<bool> Function(JavaScriptConfirmDialogRequest request)?
             callback = weakThis.target?._onJavaScriptConfirmDialog;
         if (callback != null) {
           final JavaScriptConfirmDialogRequest request =
               JavaScriptConfirmDialogRequest(
-                  message: data.message, url: data.url);
+                  message: message, url: "");
           final bool result = await callback.call(request);
           return result;
         }
 
         return false;
       },
-      runJavaScriptTextInputDialog: (WKJavaScriptPanelData data) async {
+      runJavaScriptTextInputDialog: (String prompt, String defaultText, WKFrameInfo frame) async {
         final Future<String> Function(JavaScriptTextInputDialogRequest request)?
             callback = weakThis.target?._onJavaScriptTextInputDialog;
         if (callback != null) {
           final JavaScriptTextInputDialogRequest request =
               JavaScriptTextInputDialogRequest(
-                  message: data.message,
-                  url: data.url,
-                  defaultText: data.defaultText);
+                  message: prompt,
+                  url: "",
+                  defaultText: defaultText);
           final String result = await callback.call(request);
           return result;
         }

@@ -774,26 +774,29 @@ class WKUIDelegateFlutterApiImpl extends WKUIDelegateFlutterApi {
 
   @override
   Future<void> runJavaScriptAlertPanel(
-      int identifier, WKJavaScriptPanelData data) {
+      int identifier, String message, WKFrameInfoData frame) {
     final WKUIDelegate instance =
         instanceManager.getInstanceWithWeakReference(identifier)!;
-    return instance.runJavaScriptAlertDialog!.call(data);
+    return instance.runJavaScriptAlertDialog!
+        .call(message, frame.toWKFrameInfo());
   }
 
   @override
   Future<bool> runJavaScriptConfirmPanel(
-      int identifier, WKJavaScriptPanelData data) {
+      int identifier, String message, WKFrameInfoData frame) {
     final WKUIDelegate instance =
         instanceManager.getInstanceWithWeakReference(identifier)!;
-    return instance.runJavaScriptConfirmDialog!.call(data);
+    return instance.runJavaScriptConfirmDialog!
+        .call(message, frame.toWKFrameInfo());
   }
 
   @override
-  Future<String> runJavaScriptTextInputPanel(
-      int identifier, WKJavaScriptPanelData data) {
+  Future<String> runJavaScriptTextInputPanel(int identifier, String prompt,
+      String defaultText, WKFrameInfoData frame) {
     final WKUIDelegate instance =
         instanceManager.getInstanceWithWeakReference(identifier)!;
-    return instance.runJavaScriptTextInputDialog!.call(data);
+    return instance.runJavaScriptTextInputDialog!
+        .call(prompt, defaultText, frame.toWKFrameInfo());
   }
 }
 

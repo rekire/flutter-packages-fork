@@ -608,37 +608,6 @@ class WKSecurityOriginData {
   }
 }
 
-class WKJavaScriptPanelData {
-  WKJavaScriptPanelData({
-    required this.message,
-    required this.url,
-    this.defaultText,
-  });
-
-  String message;
-
-  String url;
-
-  String? defaultText;
-
-  Object encode() {
-    return <Object?>[
-      message,
-      url,
-      defaultText,
-    ];
-  }
-
-  static WKJavaScriptPanelData decode(Object result) {
-    result as List<Object?>;
-    return WKJavaScriptPanelData(
-      message: result[0]! as String,
-      url: result[1]! as String,
-      defaultText: result[2] as String?,
-    );
-  }
-}
-
 /// Mirror of NSHttpCookieData.
 ///
 /// See https://developer.apple.com/documentation/foundation/nshttpcookie?language=objc.
@@ -2008,35 +1977,32 @@ class _WKWebViewHostApiCodec extends StandardMessageCodec {
     } else if (value is WKFrameInfoData) {
       buffer.putUint8(136);
       writeValue(buffer, value.encode());
-    } else if (value is WKJavaScriptPanelData) {
+    } else if (value is WKMediaCaptureTypeData) {
       buffer.putUint8(137);
       writeValue(buffer, value.encode());
-    } else if (value is WKMediaCaptureTypeData) {
+    } else if (value is WKNavigationActionData) {
       buffer.putUint8(138);
       writeValue(buffer, value.encode());
-    } else if (value is WKNavigationActionData) {
+    } else if (value is WKNavigationActionPolicyEnumData) {
       buffer.putUint8(139);
       writeValue(buffer, value.encode());
-    } else if (value is WKNavigationActionPolicyEnumData) {
+    } else if (value is WKPermissionDecisionData) {
       buffer.putUint8(140);
       writeValue(buffer, value.encode());
-    } else if (value is WKPermissionDecisionData) {
+    } else if (value is WKScriptMessageData) {
       buffer.putUint8(141);
       writeValue(buffer, value.encode());
-    } else if (value is WKScriptMessageData) {
+    } else if (value is WKSecurityOriginData) {
       buffer.putUint8(142);
       writeValue(buffer, value.encode());
-    } else if (value is WKSecurityOriginData) {
+    } else if (value is WKUserScriptData) {
       buffer.putUint8(143);
       writeValue(buffer, value.encode());
-    } else if (value is WKUserScriptData) {
+    } else if (value is WKUserScriptInjectionTimeEnumData) {
       buffer.putUint8(144);
       writeValue(buffer, value.encode());
-    } else if (value is WKUserScriptInjectionTimeEnumData) {
-      buffer.putUint8(145);
-      writeValue(buffer, value.encode());
     } else if (value is WKWebsiteDataTypeEnumData) {
-      buffer.putUint8(146);
+      buffer.putUint8(145);
       writeValue(buffer, value.encode());
     } else {
       super.writeValue(buffer, value);
@@ -2065,24 +2031,22 @@ class _WKWebViewHostApiCodec extends StandardMessageCodec {
       case 136: 
         return WKFrameInfoData.decode(readValue(buffer)!);
       case 137: 
-        return WKJavaScriptPanelData.decode(readValue(buffer)!);
-      case 138: 
         return WKMediaCaptureTypeData.decode(readValue(buffer)!);
-      case 139: 
+      case 138: 
         return WKNavigationActionData.decode(readValue(buffer)!);
-      case 140: 
+      case 139: 
         return WKNavigationActionPolicyEnumData.decode(readValue(buffer)!);
-      case 141: 
+      case 140: 
         return WKPermissionDecisionData.decode(readValue(buffer)!);
-      case 142: 
+      case 141: 
         return WKScriptMessageData.decode(readValue(buffer)!);
-      case 143: 
+      case 142: 
         return WKSecurityOriginData.decode(readValue(buffer)!);
-      case 144: 
+      case 143: 
         return WKUserScriptData.decode(readValue(buffer)!);
-      case 145: 
+      case 144: 
         return WKUserScriptInjectionTimeEnumData.decode(readValue(buffer)!);
-      case 146: 
+      case 145: 
         return WKWebsiteDataTypeEnumData.decode(readValue(buffer)!);
       default:
         return super.readValueOfType(type, buffer);
@@ -2605,20 +2569,17 @@ class _WKUIDelegateFlutterApiCodec extends StandardMessageCodec {
     } else if (value is WKFrameInfoData) {
       buffer.putUint8(129);
       writeValue(buffer, value.encode());
-    } else if (value is WKJavaScriptPanelData) {
+    } else if (value is WKMediaCaptureTypeData) {
       buffer.putUint8(130);
       writeValue(buffer, value.encode());
-    } else if (value is WKMediaCaptureTypeData) {
+    } else if (value is WKNavigationActionData) {
       buffer.putUint8(131);
       writeValue(buffer, value.encode());
-    } else if (value is WKNavigationActionData) {
+    } else if (value is WKPermissionDecisionData) {
       buffer.putUint8(132);
       writeValue(buffer, value.encode());
-    } else if (value is WKPermissionDecisionData) {
-      buffer.putUint8(133);
-      writeValue(buffer, value.encode());
     } else if (value is WKSecurityOriginData) {
-      buffer.putUint8(134);
+      buffer.putUint8(133);
       writeValue(buffer, value.encode());
     } else {
       super.writeValue(buffer, value);
@@ -2633,14 +2594,12 @@ class _WKUIDelegateFlutterApiCodec extends StandardMessageCodec {
       case 129: 
         return WKFrameInfoData.decode(readValue(buffer)!);
       case 130: 
-        return WKJavaScriptPanelData.decode(readValue(buffer)!);
-      case 131: 
         return WKMediaCaptureTypeData.decode(readValue(buffer)!);
-      case 132: 
+      case 131: 
         return WKNavigationActionData.decode(readValue(buffer)!);
-      case 133: 
+      case 132: 
         return WKPermissionDecisionData.decode(readValue(buffer)!);
-      case 134: 
+      case 133: 
         return WKSecurityOriginData.decode(readValue(buffer)!);
       default:
         return super.readValueOfType(type, buffer);
@@ -2660,13 +2619,13 @@ abstract class WKUIDelegateFlutterApi {
   Future<WKPermissionDecisionData> requestMediaCapturePermission(int identifier, int webViewIdentifier, WKSecurityOriginData origin, WKFrameInfoData frame, WKMediaCaptureTypeData type);
 
   /// Callback to Dart function `WKUIDelegate.runJavaScriptAlertPanel`.
-  Future<void> runJavaScriptAlertPanel(int identifier, WKJavaScriptPanelData data);
+  Future<void> runJavaScriptAlertPanel(int identifier, String message, WKFrameInfoData frame);
 
   /// Callback to Dart function `WKUIDelegate.runJavaScriptConfirmPanel`.
-  Future<bool> runJavaScriptConfirmPanel(int identifier, WKJavaScriptPanelData data);
+  Future<bool> runJavaScriptConfirmPanel(int identifier, String message, WKFrameInfoData frame);
 
   /// Callback to Dart function `WKUIDelegate.runJavaScriptTextInputPanel`.
-  Future<String> runJavaScriptTextInputPanel(int identifier, WKJavaScriptPanelData data);
+  Future<String> runJavaScriptTextInputPanel(int identifier, String prompt, String defaultText, WKFrameInfoData frame);
 
   static void setup(WKUIDelegateFlutterApi? api, {BinaryMessenger? binaryMessenger}) {
     {
@@ -2754,11 +2713,14 @@ abstract class WKUIDelegateFlutterApi {
           final int? arg_identifier = (args[0] as int?);
           assert(arg_identifier != null,
               'Argument for dev.flutter.pigeon.webview_flutter_wkwebview.WKUIDelegateFlutterApi.runJavaScriptAlertPanel was null, expected non-null int.');
-          final WKJavaScriptPanelData? arg_data = (args[1] as WKJavaScriptPanelData?);
-          assert(arg_data != null,
-              'Argument for dev.flutter.pigeon.webview_flutter_wkwebview.WKUIDelegateFlutterApi.runJavaScriptAlertPanel was null, expected non-null WKJavaScriptPanelData.');
+          final String? arg_message = (args[1] as String?);
+          assert(arg_message != null,
+              'Argument for dev.flutter.pigeon.webview_flutter_wkwebview.WKUIDelegateFlutterApi.runJavaScriptAlertPanel was null, expected non-null String.');
+          final WKFrameInfoData? arg_frame = (args[2] as WKFrameInfoData?);
+          assert(arg_frame != null,
+              'Argument for dev.flutter.pigeon.webview_flutter_wkwebview.WKUIDelegateFlutterApi.runJavaScriptAlertPanel was null, expected non-null WKFrameInfoData.');
           try {
-            await api.runJavaScriptAlertPanel(arg_identifier!, arg_data!);
+            await api.runJavaScriptAlertPanel(arg_identifier!, arg_message!, arg_frame!);
             return wrapResponse(empty: true);
           } on PlatformException catch (e) {
             return wrapResponse(error: e);
@@ -2782,11 +2744,14 @@ abstract class WKUIDelegateFlutterApi {
           final int? arg_identifier = (args[0] as int?);
           assert(arg_identifier != null,
               'Argument for dev.flutter.pigeon.webview_flutter_wkwebview.WKUIDelegateFlutterApi.runJavaScriptConfirmPanel was null, expected non-null int.');
-          final WKJavaScriptPanelData? arg_data = (args[1] as WKJavaScriptPanelData?);
-          assert(arg_data != null,
-              'Argument for dev.flutter.pigeon.webview_flutter_wkwebview.WKUIDelegateFlutterApi.runJavaScriptConfirmPanel was null, expected non-null WKJavaScriptPanelData.');
+          final String? arg_message = (args[1] as String?);
+          assert(arg_message != null,
+              'Argument for dev.flutter.pigeon.webview_flutter_wkwebview.WKUIDelegateFlutterApi.runJavaScriptConfirmPanel was null, expected non-null String.');
+          final WKFrameInfoData? arg_frame = (args[2] as WKFrameInfoData?);
+          assert(arg_frame != null,
+              'Argument for dev.flutter.pigeon.webview_flutter_wkwebview.WKUIDelegateFlutterApi.runJavaScriptConfirmPanel was null, expected non-null WKFrameInfoData.');
           try {
-            final bool output = await api.runJavaScriptConfirmPanel(arg_identifier!, arg_data!);
+            final bool output = await api.runJavaScriptConfirmPanel(arg_identifier!, arg_message!, arg_frame!);
             return wrapResponse(result: output);
           } on PlatformException catch (e) {
             return wrapResponse(error: e);
@@ -2810,11 +2775,17 @@ abstract class WKUIDelegateFlutterApi {
           final int? arg_identifier = (args[0] as int?);
           assert(arg_identifier != null,
               'Argument for dev.flutter.pigeon.webview_flutter_wkwebview.WKUIDelegateFlutterApi.runJavaScriptTextInputPanel was null, expected non-null int.');
-          final WKJavaScriptPanelData? arg_data = (args[1] as WKJavaScriptPanelData?);
-          assert(arg_data != null,
-              'Argument for dev.flutter.pigeon.webview_flutter_wkwebview.WKUIDelegateFlutterApi.runJavaScriptTextInputPanel was null, expected non-null WKJavaScriptPanelData.');
+          final String? arg_prompt = (args[1] as String?);
+          assert(arg_prompt != null,
+              'Argument for dev.flutter.pigeon.webview_flutter_wkwebview.WKUIDelegateFlutterApi.runJavaScriptTextInputPanel was null, expected non-null String.');
+          final String? arg_defaultText = (args[2] as String?);
+          assert(arg_defaultText != null,
+              'Argument for dev.flutter.pigeon.webview_flutter_wkwebview.WKUIDelegateFlutterApi.runJavaScriptTextInputPanel was null, expected non-null String.');
+          final WKFrameInfoData? arg_frame = (args[3] as WKFrameInfoData?);
+          assert(arg_frame != null,
+              'Argument for dev.flutter.pigeon.webview_flutter_wkwebview.WKUIDelegateFlutterApi.runJavaScriptTextInputPanel was null, expected non-null WKFrameInfoData.');
           try {
-            final String output = await api.runJavaScriptTextInputPanel(arg_identifier!, arg_data!);
+            final String output = await api.runJavaScriptTextInputPanel(arg_identifier!, arg_prompt!, arg_defaultText!, arg_frame!);
             return wrapResponse(result: output);
           } on PlatformException catch (e) {
             return wrapResponse(error: e);

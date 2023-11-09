@@ -792,17 +792,17 @@ class WKUIDelegate extends NSObject {
 
   /// notifies the host application that the web page
   /// wants to display a JavaScript alert() dialog.
-  final Future<void> Function(WKJavaScriptPanelData data)?
+  final Future<void> Function(String message, WKFrameInfo frame)?
       runJavaScriptAlertDialog;
 
   /// notifies the host application that the web page
   /// wants to display a JavaScript confirm() dialog.
-  final Future<bool> Function(WKJavaScriptPanelData data)?
+  final Future<bool> Function(String message, WKFrameInfo frame)?
       runJavaScriptConfirmDialog;
 
   /// notifies the host application that the web page
   /// wants to display a JavaScript prompt() dialog.
-  final Future<String> Function(WKJavaScriptPanelData data)?
+  final Future<String> Function(String prompt, String defaultText, WKFrameInfo frame)?
       runJavaScriptTextInputDialog;
 
   @override
