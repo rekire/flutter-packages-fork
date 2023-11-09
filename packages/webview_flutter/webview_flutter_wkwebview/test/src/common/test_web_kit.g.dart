@@ -1045,35 +1045,32 @@ class _TestWKWebViewHostApiCodec extends StandardMessageCodec {
     } else if (value is WKFrameInfoData) {
       buffer.putUint8(136);
       writeValue(buffer, value.encode());
-    } else if (value is WKJavaScriptPanelData) {
+    } else if (value is WKMediaCaptureTypeData) {
       buffer.putUint8(137);
       writeValue(buffer, value.encode());
-    } else if (value is WKMediaCaptureTypeData) {
+    } else if (value is WKNavigationActionData) {
       buffer.putUint8(138);
       writeValue(buffer, value.encode());
-    } else if (value is WKNavigationActionData) {
+    } else if (value is WKNavigationActionPolicyEnumData) {
       buffer.putUint8(139);
       writeValue(buffer, value.encode());
-    } else if (value is WKNavigationActionPolicyEnumData) {
+    } else if (value is WKPermissionDecisionData) {
       buffer.putUint8(140);
       writeValue(buffer, value.encode());
-    } else if (value is WKPermissionDecisionData) {
+    } else if (value is WKScriptMessageData) {
       buffer.putUint8(141);
       writeValue(buffer, value.encode());
-    } else if (value is WKScriptMessageData) {
+    } else if (value is WKSecurityOriginData) {
       buffer.putUint8(142);
       writeValue(buffer, value.encode());
-    } else if (value is WKSecurityOriginData) {
+    } else if (value is WKUserScriptData) {
       buffer.putUint8(143);
       writeValue(buffer, value.encode());
-    } else if (value is WKUserScriptData) {
+    } else if (value is WKUserScriptInjectionTimeEnumData) {
       buffer.putUint8(144);
       writeValue(buffer, value.encode());
-    } else if (value is WKUserScriptInjectionTimeEnumData) {
-      buffer.putUint8(145);
-      writeValue(buffer, value.encode());
     } else if (value is WKWebsiteDataTypeEnumData) {
-      buffer.putUint8(146);
+      buffer.putUint8(145);
       writeValue(buffer, value.encode());
     } else {
       super.writeValue(buffer, value);
@@ -1102,24 +1099,22 @@ class _TestWKWebViewHostApiCodec extends StandardMessageCodec {
       case 136: 
         return WKFrameInfoData.decode(readValue(buffer)!);
       case 137: 
-        return WKJavaScriptPanelData.decode(readValue(buffer)!);
-      case 138: 
         return WKMediaCaptureTypeData.decode(readValue(buffer)!);
-      case 139: 
+      case 138: 
         return WKNavigationActionData.decode(readValue(buffer)!);
-      case 140: 
+      case 139: 
         return WKNavigationActionPolicyEnumData.decode(readValue(buffer)!);
-      case 141: 
+      case 140: 
         return WKPermissionDecisionData.decode(readValue(buffer)!);
-      case 142: 
+      case 141: 
         return WKScriptMessageData.decode(readValue(buffer)!);
-      case 143: 
+      case 142: 
         return WKSecurityOriginData.decode(readValue(buffer)!);
-      case 144: 
+      case 143: 
         return WKUserScriptData.decode(readValue(buffer)!);
-      case 145: 
+      case 144: 
         return WKUserScriptInjectionTimeEnumData.decode(readValue(buffer)!);
-      case 146: 
+      case 145: 
         return WKWebsiteDataTypeEnumData.decode(readValue(buffer)!);
       default:
         return super.readValueOfType(type, buffer);

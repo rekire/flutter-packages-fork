@@ -264,7 +264,6 @@ typedef NS_ENUM(NSUInteger, FWFWKMediaCaptureType) {
 @class FWFNSErrorData;
 @class FWFWKScriptMessageData;
 @class FWFWKSecurityOriginData;
-@class FWFWKJavaScriptPanelData;
 @class FWFNSHttpCookieData;
 @class FWFObjectOrIdentifier;
 
@@ -423,17 +422,6 @@ typedef NS_ENUM(NSUInteger, FWFWKMediaCaptureType) {
 @property(nonatomic, copy) NSString * host;
 @property(nonatomic, assign) NSInteger  port;
 @property(nonatomic, copy) NSString * protocol;
-@end
-
-@interface FWFWKJavaScriptPanelData : NSObject
-/// `init` unavailable to enforce nonnull fields, see the `make` class method.
-- (instancetype)init NS_UNAVAILABLE;
-+ (instancetype)makeWithMessage:(NSString *)message
-    url:(NSString *)url
-    defaultText:(nullable NSString *)defaultText;
-@property(nonatomic, copy) NSString * message;
-@property(nonatomic, copy) NSString * url;
-@property(nonatomic, copy, nullable) NSString * defaultText;
 @end
 
 /// Mirror of NSHttpCookieData.
@@ -697,11 +685,11 @@ NSObject<FlutterMessageCodec> *FWFWKUIDelegateFlutterApiGetCodec(void);
 /// Callback to Dart function `WKUIDelegate.requestMediaCapturePermission`.
 - (void)requestMediaCapturePermissionForDelegateWithIdentifier:(NSInteger)identifier webViewIdentifier:(NSInteger)webViewIdentifier origin:(FWFWKSecurityOriginData *)origin frame:(FWFWKFrameInfoData *)frame type:(FWFWKMediaCaptureTypeData *)type completion:(void (^)(FWFWKPermissionDecisionData *_Nullable, FlutterError *_Nullable))completion;
 /// Callback to Dart function `WKUIDelegate.runJavaScriptAlertPanel`.
-- (void)runJavaScriptAlertPanelForDelegateWithIdentifier:(NSInteger)identifier data:(FWFWKJavaScriptPanelData *)data completion:(void (^)(FlutterError *_Nullable))completion;
+- (void)runJavaScriptAlertPanelForDelegateWithIdentifier:(NSInteger)identifier message:(NSString *)message frame:(FWFWKFrameInfoData *)frame completion:(void (^)(FlutterError *_Nullable))completion;
 /// Callback to Dart function `WKUIDelegate.runJavaScriptConfirmPanel`.
-- (void)runJavaScriptConfirmPanelForDelegateWithIdentifier:(NSInteger)identifier data:(FWFWKJavaScriptPanelData *)data completion:(void (^)(NSNumber *_Nullable, FlutterError *_Nullable))completion;
+- (void)runJavaScriptConfirmPanelForDelegateWithIdentifier:(NSInteger)identifier message:(NSString *)message frame:(FWFWKFrameInfoData *)frame completion:(void (^)(NSNumber *_Nullable, FlutterError *_Nullable))completion;
 /// Callback to Dart function `WKUIDelegate.runJavaScriptTextInputPanel`.
-- (void)runJavaScriptTextInputPanelForDelegateWithIdentifier:(NSInteger)identifier data:(FWFWKJavaScriptPanelData *)data completion:(void (^)(NSString *_Nullable, FlutterError *_Nullable))completion;
+- (void)runJavaScriptTextInputPanelForDelegateWithIdentifier:(NSInteger)identifier prompt:(NSString *)prompt defaultText:(NSString *)defaultText frame:(FWFWKFrameInfoData *)frame completion:(void (^)(NSString *_Nullable, FlutterError *_Nullable))completion;
 @end
 
 /// The codec used by FWFWKHttpCookieStoreHostApi.
