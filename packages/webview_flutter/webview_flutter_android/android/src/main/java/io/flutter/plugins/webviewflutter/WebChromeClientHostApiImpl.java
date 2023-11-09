@@ -147,11 +147,7 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
     @Override
     public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
       if( returnValueForOnJsAlert ) {
-        GeneratedAndroidWebView.JavaScriptDialogData data = new GeneratedAndroidWebView.JavaScriptDialogData();
-        data.setUrl(url);
-        data.setMessage(message);
-
-        flutterApi.onJsAlert(this, data, reply -> {
+        flutterApi.onJsAlert(this, url, message, reply -> {
           result.confirm();
         });
         return true;
@@ -163,11 +159,7 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
     @Override
     public boolean onJsConfirm(WebView view, String url, String message, JsResult result) {
       if( returnValueForOnJsConfirm ) {
-        GeneratedAndroidWebView.JavaScriptDialogData data = new GeneratedAndroidWebView.JavaScriptDialogData();
-        data.setUrl(url);
-        data.setMessage(message);
-
-        flutterApi.onJsConfirm(this, data, reply -> {
+        flutterApi.onJsConfirm(this, url, message, reply -> {
           if(reply) {
             result.confirm();
           } else {
@@ -183,12 +175,7 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
     @Override
     public boolean onJsPrompt(WebView view, String url, String message, String defaultValue, JsPromptResult result) {
       if( returnValueForOnJsPrompt ) {
-        GeneratedAndroidWebView.JavaScriptDialogData data = new GeneratedAndroidWebView.JavaScriptDialogData();
-        data.setUrl(url);
-        data.setMessage(message);
-        data.setDefaultText(defaultValue);
-
-        flutterApi.onJsPrompt(this, data, reply -> {
+        flutterApi.onJsPrompt(this, url, message, defaultValue, reply -> {
           @Nullable String inputMessage = reply;
           if(inputMessage != null) {
             result.confirm(inputMessage);

@@ -133,37 +133,6 @@ class WebResourceErrorData {
   }
 }
 
-class JavaScriptDialogData {
-  JavaScriptDialogData({
-    required this.message,
-    required this.url,
-    this.defaultText,
-  });
-
-  String message;
-
-  String url;
-
-  String? defaultText;
-
-  Object encode() {
-    return <Object?>[
-      message,
-      url,
-      defaultText,
-    ];
-  }
-
-  static JavaScriptDialogData decode(Object result) {
-    result as List<Object?>;
-    return JavaScriptDialogData(
-      message: result[0]! as String,
-      url: result[1]! as String,
-      defaultText: result[2] as String?,
-    );
-  }
-}
-
 class WebViewPoint {
   WebViewPoint({
     required this.x,
@@ -2107,9 +2076,6 @@ class _WebChromeClientFlutterApiCodec extends StandardMessageCodec {
     if (value is ConsoleMessage) {
       buffer.putUint8(128);
       writeValue(buffer, value.encode());
-    } else if (value is JavaScriptDialogData) {
-      buffer.putUint8(129);
-      writeValue(buffer, value.encode());
     } else {
       super.writeValue(buffer, value);
     }
@@ -2120,8 +2086,6 @@ class _WebChromeClientFlutterApiCodec extends StandardMessageCodec {
     switch (type) {
       case 128: 
         return ConsoleMessage.decode(readValue(buffer)!);
-      case 129: 
-        return JavaScriptDialogData.decode(readValue(buffer)!);
       default:
         return super.readValueOfType(type, buffer);
     }
@@ -2153,11 +2117,11 @@ abstract class WebChromeClientFlutterApi {
   /// Callback to Dart function `WebChromeClient.onConsoleMessage`.
   void onConsoleMessage(int instanceId, ConsoleMessage message);
 
-  Future<void> onJsAlert(int instanceId, JavaScriptDialogData data);
+  Future<void> onJsAlert(int instanceId, String url, String message);
 
-  Future<bool> onJsConfirm(int instanceId, JavaScriptDialogData data);
+  Future<bool> onJsConfirm(int instanceId, String url, String message);
 
-  Future<String> onJsPrompt(int instanceId, JavaScriptDialogData data);
+  Future<String> onJsPrompt(int instanceId, String url, String message, String defaultValue);
 
   static void setup(WebChromeClientFlutterApi? api, {BinaryMessenger? binaryMessenger}) {
     {
@@ -2356,10 +2320,13 @@ abstract class WebChromeClientFlutterApi {
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
               'Argument for dev.flutter.pigeon.webview_flutter_android.WebChromeClientFlutterApi.onJsAlert was null, expected non-null int.');
-          final JavaScriptDialogData? arg_data = (args[1] as JavaScriptDialogData?);
-          assert(arg_data != null,
-              'Argument for dev.flutter.pigeon.webview_flutter_android.WebChromeClientFlutterApi.onJsAlert was null, expected non-null JavaScriptDialogData.');
-          await api.onJsAlert(arg_instanceId!, arg_data!);
+          final String? arg_url = (args[1] as String?);
+          assert(arg_url != null,
+              'Argument for dev.flutter.pigeon.webview_flutter_android.WebChromeClientFlutterApi.onJsAlert was null, expected non-null String.');
+          final String? arg_message = (args[2] as String?);
+          assert(arg_message != null,
+              'Argument for dev.flutter.pigeon.webview_flutter_android.WebChromeClientFlutterApi.onJsAlert was null, expected non-null String.');
+          await api.onJsAlert(arg_instanceId!, arg_url!, arg_message!);
           return;
         });
       }
@@ -2378,10 +2345,13 @@ abstract class WebChromeClientFlutterApi {
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
               'Argument for dev.flutter.pigeon.webview_flutter_android.WebChromeClientFlutterApi.onJsConfirm was null, expected non-null int.');
-          final JavaScriptDialogData? arg_data = (args[1] as JavaScriptDialogData?);
-          assert(arg_data != null,
-              'Argument for dev.flutter.pigeon.webview_flutter_android.WebChromeClientFlutterApi.onJsConfirm was null, expected non-null JavaScriptDialogData.');
-          final bool output = await api.onJsConfirm(arg_instanceId!, arg_data!);
+          final String? arg_url = (args[1] as String?);
+          assert(arg_url != null,
+              'Argument for dev.flutter.pigeon.webview_flutter_android.WebChromeClientFlutterApi.onJsConfirm was null, expected non-null String.');
+          final String? arg_message = (args[2] as String?);
+          assert(arg_message != null,
+              'Argument for dev.flutter.pigeon.webview_flutter_android.WebChromeClientFlutterApi.onJsConfirm was null, expected non-null String.');
+          final bool output = await api.onJsConfirm(arg_instanceId!, arg_url!, arg_message!);
           return output;
         });
       }
@@ -2400,10 +2370,16 @@ abstract class WebChromeClientFlutterApi {
           final int? arg_instanceId = (args[0] as int?);
           assert(arg_instanceId != null,
               'Argument for dev.flutter.pigeon.webview_flutter_android.WebChromeClientFlutterApi.onJsPrompt was null, expected non-null int.');
-          final JavaScriptDialogData? arg_data = (args[1] as JavaScriptDialogData?);
-          assert(arg_data != null,
-              'Argument for dev.flutter.pigeon.webview_flutter_android.WebChromeClientFlutterApi.onJsPrompt was null, expected non-null JavaScriptDialogData.');
-          final String output = await api.onJsPrompt(arg_instanceId!, arg_data!);
+          final String? arg_url = (args[1] as String?);
+          assert(arg_url != null,
+              'Argument for dev.flutter.pigeon.webview_flutter_android.WebChromeClientFlutterApi.onJsPrompt was null, expected non-null String.');
+          final String? arg_message = (args[2] as String?);
+          assert(arg_message != null,
+              'Argument for dev.flutter.pigeon.webview_flutter_android.WebChromeClientFlutterApi.onJsPrompt was null, expected non-null String.');
+          final String? arg_defaultValue = (args[3] as String?);
+          assert(arg_defaultValue != null,
+              'Argument for dev.flutter.pigeon.webview_flutter_android.WebChromeClientFlutterApi.onJsPrompt was null, expected non-null String.');
+          final String output = await api.onJsPrompt(arg_instanceId!, arg_url!, arg_message!, arg_defaultValue!);
           return output;
         });
       }

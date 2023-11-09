@@ -53,9 +53,9 @@ class AndroidWebViewProxy {
             android_webview.CustomViewCallback callback)?
         onShowCustomView,
     void Function(android_webview.WebChromeClient instance)? onHideCustomView,
-    Future<void> Function(android_webview.JavaScriptDialogData)? onJsAlert,
-    Future<bool> Function(android_webview.JavaScriptDialogData)? onJsConfirm,
-    Future<String> Function(android_webview.JavaScriptDialogData)? onJsPrompt,
+    Future<void> Function(String url, String message)? onJsAlert,
+    Future<bool> Function(String url, String message)? onJsConfirm,
+    Future<String> Function(String url, String message, String defaultValue)? onJsPrompt,
   }) createAndroidWebChromeClient;
 
   /// Constructs a [android_webview.WebViewClient].

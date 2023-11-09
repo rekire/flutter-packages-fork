@@ -194,12 +194,14 @@ public class WebChromeClientFlutterApiImpl extends WebChromeClientFlutterApi {
    */
   public void onJsAlert(
           @NonNull WebChromeClient instance,
-          @NonNull GeneratedAndroidWebView.JavaScriptDialogData data,
+          @NonNull String url,
+          @NonNull String message,
           @NonNull WebChromeClientFlutterApi.Reply<Void> callback
             ) {
     super.onJsAlert(
             Objects.requireNonNull(instanceManager.getIdentifierForStrongReference(instance)),
-            data,
+            url,
+            message,
             callback
     );
   }
@@ -210,12 +212,14 @@ public class WebChromeClientFlutterApiImpl extends WebChromeClientFlutterApi {
    */
   public void onJsConfirm(
           @NonNull WebChromeClient instance,
-          @NonNull GeneratedAndroidWebView.JavaScriptDialogData data,
+          @NonNull String url,
+          @NonNull String message,
           @NonNull WebChromeClientFlutterApi.Reply<Boolean> callback
   ) {
     super.onJsConfirm(
             Objects.requireNonNull(instanceManager.getIdentifierForStrongReference(instance)),
-            data,
+            url,
+            message,
             callback
     );
   }
@@ -226,12 +230,16 @@ public class WebChromeClientFlutterApiImpl extends WebChromeClientFlutterApi {
    */
   public void onJsPrompt(
           @NonNull WebChromeClient instance,
-          @NonNull GeneratedAndroidWebView.JavaScriptDialogData data,
+          @NonNull String url,
+          @NonNull String message,
+          @NonNull String defaultValue,
           @NonNull WebChromeClientFlutterApi.Reply<String> callback
   ) {
     super.onJsPrompt(
             Objects.requireNonNull(instanceManager.getIdentifierForStrongReference(instance)),
-            data,
+            url,
+            message,
+            defaultValue,
             callback
     );
   }

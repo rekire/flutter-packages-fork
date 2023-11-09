@@ -841,9 +841,19 @@ class MockAndroidWebViewProxy extends _i1.Mock
       _i2.GeolocationPermissionsCallback,
     )? onGeolocationPermissionsShowPrompt,
     void Function(_i2.WebChromeClient)? onHideCustomView,
-    _i9.Future<void> Function(_i2.JavaScriptDialogData)? onJsAlert,
-    _i9.Future<bool> Function(_i2.JavaScriptDialogData)? onJsConfirm,
-    _i9.Future<String> Function(_i2.JavaScriptDialogData)? onJsPrompt,
+    _i9.Future<void> Function(
+      String,
+      String,
+    )? onJsAlert,
+    _i9.Future<bool> Function(
+      String,
+      String,
+    )? onJsConfirm,
+    _i9.Future<String> Function(
+      String,
+      String,
+      String,
+    )? onJsPrompt,
     void Function(
       _i2.WebChromeClient,
       _i2.PermissionRequest,
@@ -875,9 +885,19 @@ class MockAndroidWebViewProxy extends _i1.Mock
             _i2.GeolocationPermissionsCallback,
           )? onGeolocationPermissionsShowPrompt,
           void Function(_i2.WebChromeClient)? onHideCustomView,
-          _i9.Future<void> Function(_i2.JavaScriptDialogData)? onJsAlert,
-          _i9.Future<bool> Function(_i2.JavaScriptDialogData)? onJsConfirm,
-          _i9.Future<String> Function(_i2.JavaScriptDialogData)? onJsPrompt,
+          _i9.Future<void> Function(
+            String,
+            String,
+          )? onJsAlert,
+          _i9.Future<bool> Function(
+            String,
+            String,
+          )? onJsConfirm,
+          _i9.Future<String> Function(
+            String,
+            String,
+            String,
+          )? onJsPrompt,
           void Function(
             _i2.WebChromeClient,
             _i2.PermissionRequest,
@@ -912,9 +932,19 @@ class MockAndroidWebViewProxy extends _i1.Mock
             _i2.GeolocationPermissionsCallback,
           )? onGeolocationPermissionsShowPrompt,
           void Function(_i2.WebChromeClient)? onHideCustomView,
-          _i9.Future<void> Function(_i2.JavaScriptDialogData)? onJsAlert,
-          _i9.Future<bool> Function(_i2.JavaScriptDialogData)? onJsConfirm,
-          _i9.Future<String> Function(_i2.JavaScriptDialogData)? onJsPrompt,
+          _i9.Future<void> Function(
+            String,
+            String,
+          )? onJsAlert,
+          _i9.Future<bool> Function(
+            String,
+            String,
+          )? onJsConfirm,
+          _i9.Future<String> Function(
+            String,
+            String,
+            String,
+          )? onJsPrompt,
           void Function(
             _i2.WebChromeClient,
             _i2.PermissionRequest,
@@ -948,9 +978,19 @@ class MockAndroidWebViewProxy extends _i1.Mock
           _i2.GeolocationPermissionsCallback,
         )? onGeolocationPermissionsShowPrompt,
         void Function(_i2.WebChromeClient)? onHideCustomView,
-        _i9.Future<void> Function(_i2.JavaScriptDialogData)? onJsAlert,
-        _i9.Future<bool> Function(_i2.JavaScriptDialogData)? onJsConfirm,
-        _i9.Future<String> Function(_i2.JavaScriptDialogData)? onJsPrompt,
+        _i9.Future<void> Function(
+          String,
+          String,
+        )? onJsAlert,
+        _i9.Future<bool> Function(
+          String,
+          String,
+        )? onJsConfirm,
+        _i9.Future<String> Function(
+          String,
+          String,
+          String,
+        )? onJsPrompt,
         void Function(
           _i2.WebChromeClient,
           _i2.PermissionRequest,
