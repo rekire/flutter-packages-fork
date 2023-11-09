@@ -13,7 +13,7 @@ import 'android_webview_api_impls.dart';
 import 'instance_manager.dart';
 
 export 'android_webview_api_impls.dart'
-    show ConsoleMessage, ConsoleMessageLevel, FileChooserMode, JavaScriptDialogData;
+    show ConsoleMessage, ConsoleMessageLevel, FileChooserMode;
 
 /// Root of the Java class hierarchy.
 ///
@@ -1139,9 +1139,9 @@ class WebChromeClient extends JavaObject {
   final void Function(WebChromeClient instance, ConsoleMessage message)?
       onConsoleMessage;
 
-  final Future<void> Function(JavaScriptDialogData data)? onJsAlert;
-  final Future<bool> Function(JavaScriptDialogData data)? onJsConfirm;
-  final Future<String> Function(JavaScriptDialogData data)?
+  final Future<void> Function(String url, String message)? onJsAlert;
+  final Future<bool> Function(String url, String message)? onJsConfirm;
+  final Future<String> Function(String url, String message, String defaultValue)?
       onJsPrompt;
 
   /// Sets the required synchronous return value for the Java method,

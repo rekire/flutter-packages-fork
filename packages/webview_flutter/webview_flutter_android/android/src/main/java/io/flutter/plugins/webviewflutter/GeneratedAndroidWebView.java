@@ -384,100 +384,6 @@ public class GeneratedAndroidWebView {
   }
 
   /** Generated class from Pigeon that represents data sent in messages. */
-  public static final class JavaScriptDialogData {
-    private @NonNull String message;
-
-    public @NonNull String getMessage() {
-      return message;
-    }
-
-    public void setMessage(@NonNull String setterArg) {
-      if (setterArg == null) {
-        throw new IllegalStateException("Nonnull field \"message\" is null.");
-      }
-      this.message = setterArg;
-    }
-
-    private @NonNull String url;
-
-    public @NonNull String getUrl() {
-      return url;
-    }
-
-    public void setUrl(@NonNull String setterArg) {
-      if (setterArg == null) {
-        throw new IllegalStateException("Nonnull field \"url\" is null.");
-      }
-      this.url = setterArg;
-    }
-
-    private @Nullable String defaultText;
-
-    public @Nullable String getDefaultText() {
-      return defaultText;
-    }
-
-    public void setDefaultText(@Nullable String setterArg) {
-      this.defaultText = setterArg;
-    }
-
-    /** Constructor is non-public to enforce null safety; use Builder. */
-    JavaScriptDialogData() {}
-
-    public static final class Builder {
-
-      private @Nullable String message;
-
-      public @NonNull Builder setMessage(@NonNull String setterArg) {
-        this.message = setterArg;
-        return this;
-      }
-
-      private @Nullable String url;
-
-      public @NonNull Builder setUrl(@NonNull String setterArg) {
-        this.url = setterArg;
-        return this;
-      }
-
-      private @Nullable String defaultText;
-
-      public @NonNull Builder setDefaultText(@Nullable String setterArg) {
-        this.defaultText = setterArg;
-        return this;
-      }
-
-      public @NonNull JavaScriptDialogData build() {
-        JavaScriptDialogData pigeonReturn = new JavaScriptDialogData();
-        pigeonReturn.setMessage(message);
-        pigeonReturn.setUrl(url);
-        pigeonReturn.setDefaultText(defaultText);
-        return pigeonReturn;
-      }
-    }
-
-    @NonNull
-    ArrayList<Object> toList() {
-      ArrayList<Object> toListResult = new ArrayList<Object>(3);
-      toListResult.add(message);
-      toListResult.add(url);
-      toListResult.add(defaultText);
-      return toListResult;
-    }
-
-    static @NonNull JavaScriptDialogData fromList(@NonNull ArrayList<Object> list) {
-      JavaScriptDialogData pigeonResult = new JavaScriptDialogData();
-      Object message = list.get(0);
-      pigeonResult.setMessage((String) message);
-      Object url = list.get(1);
-      pigeonResult.setUrl((String) url);
-      Object defaultText = list.get(2);
-      pigeonResult.setDefaultText((String) defaultText);
-      return pigeonResult;
-    }
-  }
-
-  /** Generated class from Pigeon that represents data sent in messages. */
   public static final class WebViewPoint {
     private @NonNull Long x;
 
@@ -2683,8 +2589,6 @@ public class GeneratedAndroidWebView {
       switch (type) {
         case (byte) 128:
           return ConsoleMessage.fromList((ArrayList<Object>) readValue(buffer));
-        case (byte) 129:
-          return JavaScriptDialogData.fromList((ArrayList<Object>) readValue(buffer));
         default:
           return super.readValueOfType(type, buffer);
       }
@@ -2695,9 +2599,6 @@ public class GeneratedAndroidWebView {
       if (value instanceof ConsoleMessage) {
         stream.write(128);
         writeValue(stream, ((ConsoleMessage) value).toList());
-      } else if (value instanceof JavaScriptDialogData) {
-        stream.write(129);
-        writeValue(stream, ((JavaScriptDialogData) value).toList());
       } else {
         super.writeValue(stream, value);
       }
@@ -2795,32 +2696,32 @@ public class GeneratedAndroidWebView {
           new ArrayList<Object>(Arrays.asList(instanceIdArg, messageArg)),
           channelReply -> callback.reply(null));
     }
-    public void onJsAlert(@NonNull Long instanceIdArg, @NonNull JavaScriptDialogData dataArg, @NonNull Reply<Void> callback) {
+    public void onJsAlert(@NonNull Long instanceIdArg, @NonNull String urlArg, @NonNull String messageArg, @NonNull Reply<Void> callback) {
       BasicMessageChannel<Object> channel =
           new BasicMessageChannel<>(
               binaryMessenger, "dev.flutter.pigeon.webview_flutter_android.WebChromeClientFlutterApi.onJsAlert", getCodec());
       channel.send(
-          new ArrayList<Object>(Arrays.asList(instanceIdArg, dataArg)),
+          new ArrayList<Object>(Arrays.asList(instanceIdArg, urlArg, messageArg)),
           channelReply -> callback.reply(null));
     }
-    public void onJsConfirm(@NonNull Long instanceIdArg, @NonNull JavaScriptDialogData dataArg, @NonNull Reply<Boolean> callback) {
+    public void onJsConfirm(@NonNull Long instanceIdArg, @NonNull String urlArg, @NonNull String messageArg, @NonNull Reply<Boolean> callback) {
       BasicMessageChannel<Object> channel =
           new BasicMessageChannel<>(
               binaryMessenger, "dev.flutter.pigeon.webview_flutter_android.WebChromeClientFlutterApi.onJsConfirm", getCodec());
       channel.send(
-          new ArrayList<Object>(Arrays.asList(instanceIdArg, dataArg)),
+          new ArrayList<Object>(Arrays.asList(instanceIdArg, urlArg, messageArg)),
           channelReply -> {
             @SuppressWarnings("ConstantConditions")
             Boolean output = (Boolean) channelReply;
             callback.reply(output);
           });
     }
-    public void onJsPrompt(@NonNull Long instanceIdArg, @NonNull JavaScriptDialogData dataArg, @NonNull Reply<String> callback) {
+    public void onJsPrompt(@NonNull Long instanceIdArg, @NonNull String urlArg, @NonNull String messageArg, @NonNull String defaultValueArg, @NonNull Reply<String> callback) {
       BasicMessageChannel<Object> channel =
           new BasicMessageChannel<>(
               binaryMessenger, "dev.flutter.pigeon.webview_flutter_android.WebChromeClientFlutterApi.onJsPrompt", getCodec());
       channel.send(
-          new ArrayList<Object>(Arrays.asList(instanceIdArg, dataArg)),
+          new ArrayList<Object>(Arrays.asList(instanceIdArg, urlArg, messageArg, defaultValueArg)),
           channelReply -> {
             @SuppressWarnings("ConstantConditions")
             String output = (String) channelReply;

@@ -12,7 +12,10 @@ import 'android_webview.g.dart';
 import 'instance_manager.dart';
 
 export 'android_webview.g.dart'
-    show ConsoleMessage, ConsoleMessageLevel, FileChooserMode, JavaScriptDialogData;
+    show
+        ConsoleMessage,
+        ConsoleMessageLevel,
+        FileChooserMode;
 
 /// Converts [WebResourceRequestData] to [WebResourceRequest]
 WebResourceRequest _toWebResourceRequest(WebResourceRequestData data) {
@@ -919,17 +922,17 @@ class WebChromeClientHostApiImpl extends WebChromeClientHostApi {
   }
 
   Future<void> setSynchronousReturnValueForOnJsConfirmFromInstance(
-      WebChromeClient instance,
-      bool value,
-      ) {
+    WebChromeClient instance,
+    bool value,
+  ) {
     return setSynchronousReturnValueForOnJsConfirm(
         instanceManager.getIdentifier(instance)!, value);
   }
 
   Future<void> setSynchronousReturnValueForOnJsPromptFromInstance(
-      WebChromeClient instance,
-      bool value,
-      ) {
+    WebChromeClient instance,
+    bool value,
+  ) {
     return setSynchronousReturnValueForOnJsPrompt(
         instanceManager.getIdentifier(instance)!, value);
   }
@@ -1067,27 +1070,28 @@ class WebChromeClientFlutterApiImpl extends WebChromeClientFlutterApi {
   }
 
   @override
-  Future<void> onJsAlert(int instanceId, JavaScriptDialogData data) {
+  Future<void> onJsAlert(int instanceId, String url, String message) {
     final WebChromeClient instance =
-    instanceManager.getInstanceWithWeakReference(instanceId)!;
+        instanceManager.getInstanceWithWeakReference(instanceId)!;
 
-    return instance.onJsAlert!(data);
+    return instance.onJsAlert!(url, message);
   }
 
   @override
-  Future<bool> onJsConfirm(int instanceId, JavaScriptDialogData data) {
+  Future<bool> onJsConfirm(int instanceId, String url, String message) {
     final WebChromeClient instance =
-    instanceManager.getInstanceWithWeakReference(instanceId)!;
+        instanceManager.getInstanceWithWeakReference(instanceId)!;
 
-    return instance.onJsConfirm!(data);
+    return instance.onJsConfirm!(url, message);
   }
 
   @override
-  Future<String> onJsPrompt(int instanceId, JavaScriptDialogData data) {
+  Future<String> onJsPrompt(
+      int instanceId, String url, String message, String defaultValue) {
     final WebChromeClient instance =
-    instanceManager.getInstanceWithWeakReference(instanceId)!;
+        instanceManager.getInstanceWithWeakReference(instanceId)!;
 
-    return instance.onJsPrompt!(data);
+    return instance.onJsPrompt!(url, message, defaultValue);
   }
 }
 

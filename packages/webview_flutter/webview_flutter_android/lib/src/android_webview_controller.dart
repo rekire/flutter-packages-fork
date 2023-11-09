@@ -270,13 +270,13 @@ class AndroidWebViewController extends PlatformWebViewController {
     ),
     onJsAlert: withWeakReferenceTo(this,
         (WeakReference<AndroidWebViewController> weakReference) {
-      return (android_webview.JavaScriptDialogData data) async {
+      return (String url, String message) async {
         final Future<void> Function(JavaScriptAlertDialogRequest)? callback =
             weakReference.target?._onJavaScriptAlert;
         if (callback != null) {
           final JavaScriptAlertDialogRequest request =
               JavaScriptAlertDialogRequest(
-                  message: data.message, url: data.url);
+                  message: message, url: url);
 
           await callback.call(request);
         }
@@ -285,13 +285,13 @@ class AndroidWebViewController extends PlatformWebViewController {
     }),
     onJsConfirm: withWeakReferenceTo(this,
         (WeakReference<AndroidWebViewController> weakReference) {
-      return (android_webview.JavaScriptDialogData data) async {
+      return (String url, String message) async {
         final Future<bool> Function(JavaScriptConfirmDialogRequest)? callback =
             weakReference.target?._onJavaScriptConfirm;
         if (callback != null) {
           final JavaScriptConfirmDialogRequest request =
               JavaScriptConfirmDialogRequest(
-                  message: data.message, url: data.url);
+                  message: message, url: url);
           final bool result = await callback.call(request);
           return result;
         }
@@ -300,15 +300,15 @@ class AndroidWebViewController extends PlatformWebViewController {
     }),
     onJsPrompt: withWeakReferenceTo(this,
         (WeakReference<AndroidWebViewController> weakReference) {
-      return (android_webview.JavaScriptDialogData data) async {
+      return (String url, String message, String defaultValue) async {
         final Future<String> Function(JavaScriptTextInputDialogRequest)?
             callback = weakReference.target?._onJavaScriptPrompt;
         if (callback != null) {
           final JavaScriptTextInputDialogRequest request =
               JavaScriptTextInputDialogRequest(
-                  message: data.message,
-                  url: data.url,
-                  defaultText: data.defaultText);
+                  message: message,
+                  url: url,
+                  defaultText: defaultValue);
           final String result = await callback.call(request);
           return result;
         }

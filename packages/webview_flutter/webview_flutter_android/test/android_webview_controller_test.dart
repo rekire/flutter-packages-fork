@@ -76,9 +76,10 @@ void main() {
       void Function(android_webview.WebChromeClient instance,
               android_webview.ConsoleMessage message)?
           onConsoleMessage,
-      Future<void> Function(android_webview.JavaScriptDialogData data)? onJsAlert,
-      Future<bool> Function(android_webview.JavaScriptDialogData data)? onJsConfirm,
-      Future<String> Function(android_webview.JavaScriptDialogData data)? onJsPrompt,
+      Future<void> Function(String url, String message)? onJsAlert,
+      Future<bool> Function(String url, String message)? onJsConfirm,
+      Future<String> Function(String url, String message, String defaultValue)?
+          onJsPrompt,
     })? createWebChromeClient,
     android_webview.WebView? mockWebView,
     android_webview.WebViewClient? mockWebViewClient,
@@ -120,9 +121,15 @@ void main() {
                     void Function(android_webview.WebChromeClient instance,
                             android_webview.ConsoleMessage message)?
                         onConsoleMessage,
-                    Future<void> Function(android_webview.JavaScriptDialogData data)? onJsAlert,
-                    Future<bool> Function(android_webview.JavaScriptDialogData data)? onJsConfirm,
-                    Future<String> Function(android_webview.JavaScriptDialogData data)? onJsPrompt,
+                    Future<void> Function(
+                            String url, String message)?
+                        onJsAlert,
+                    Future<bool> Function(
+                            String url, String message)?
+                        onJsConfirm,
+                    Future<String> Function(
+                            String url, String message, String defaultValue)?
+                        onJsPrompt,
                   }) =>
                       MockWebChromeClient(),
               createAndroidWebView: () => nonNullMockWebView,
