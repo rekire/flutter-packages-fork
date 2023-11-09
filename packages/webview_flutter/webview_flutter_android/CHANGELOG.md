@@ -1,6 +1,6 @@
 ## 3.13.0
 
-* Add support to show JavaScript dialog. See `PlatformWebViewController.setJavaScriptAlertDialogCallback`, `PlatformWebViewController.setJavaScriptConfirmDialogCallback` and `PlatformWebViewController.setJavaScriptTextInputDialogCallback`.
+* Adds support to show JavaScript dialog. See `AndroidWebViewController.setOnJavaScriptAlertDialog`, `AndroidWebViewController.setOnJavaScriptConfirmDialog` and `AndroidWebViewController.setOnJavaScriptTextInputDialog`.
 
 ## NEXT
 

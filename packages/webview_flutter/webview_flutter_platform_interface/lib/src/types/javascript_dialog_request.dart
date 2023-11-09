@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 import 'package:flutter/foundation.dart';
 
-/// Defines the parameters that support setOnJavaScriptAlertDialog
+/// Defines the parameters that support setOnJavaScriptAlertDialog.
 @immutable
 class JavaScriptAlertDialogRequest {
   /// Creates a [JavaScriptAlertDialogRequest].
@@ -19,7 +19,7 @@ class JavaScriptAlertDialogRequest {
   final String url;
 }
 
-/// Defines the parameters that support setOnJavaScriptConfirmDialog
+/// Defines the parameters that support setOnJavaScriptConfirmDialog.
 @immutable
 class JavaScriptConfirmDialogRequest {
   /// Creates a [JavaScriptConfirmDialogRequest].
@@ -35,7 +35,7 @@ class JavaScriptConfirmDialogRequest {
   final String url;
 }
 
-/// Defines the parameters that support JavaScriptTextInputDialogRequest
+/// Defines the parameters that support JavaScriptTextInputDialogRequest.
 @immutable
 class JavaScriptTextInputDialogRequest {
   /// Creates a [JavaScriptAlertDialogRequest].
