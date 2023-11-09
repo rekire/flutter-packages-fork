@@ -176,10 +176,16 @@ class WKNavigationAction {
 @immutable
 class WKFrameInfo {
   /// Construct a [WKFrameInfo].
-  const WKFrameInfo({required this.isMainFrame});
+  const WKFrameInfo({
+    required this.isMainFrame,
+    required this.request,
+  });
 
   /// Indicates whether the frame is the web site's main frame or a subframe.
   final bool isMainFrame;
+
+  /// The URL request object associated with the navigation action.
+  final NSUrlRequest request;
 }
 
 /// A script that the web view injects into a webpage.

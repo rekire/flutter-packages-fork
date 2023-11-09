@@ -380,8 +380,10 @@ typedef NS_ENUM(NSUInteger, FWFWKMediaCaptureType) {
 @interface FWFWKFrameInfoData : NSObject
 /// `init` unavailable to enforce nonnull fields, see the `make` class method.
 - (instancetype)init NS_UNAVAILABLE;
-+ (instancetype)makeWithIsMainFrame:(BOOL )isMainFrame;
++ (instancetype)makeWithIsMainFrame:(BOOL )isMainFrame
+    request:(FWFNSUrlRequestData *)request;
 @property(nonatomic, assign) BOOL  isMainFrame;
+@property(nonatomic, strong) FWFNSUrlRequestData * request;
 @end
 
 /// Mirror of NSError.

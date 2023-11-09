@@ -183,7 +183,9 @@ extension _NavigationActionDataConverter on WKNavigationActionData {
 
 extension _WKFrameInfoDataConverter on WKFrameInfoData {
   WKFrameInfo toWKFrameInfo() {
-    return WKFrameInfo(isMainFrame: isMainFrame);
+    return WKFrameInfo(isMainFrame: isMainFrame,
+      request: request.toNSUrlRequest(),
+    );
   }
 }
 

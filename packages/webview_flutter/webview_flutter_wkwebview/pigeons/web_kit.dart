@@ -291,6 +291,7 @@ class WKNavigationActionData {
 /// See https://developer.apple.com/documentation/webkit/wkframeinfo?language=objc.
 class WKFrameInfoData {
   late bool isMainFrame;
+  late NSUrlRequestData request;
 }
 
 /// Mirror of NSError.
