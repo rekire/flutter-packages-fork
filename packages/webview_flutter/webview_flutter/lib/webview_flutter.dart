@@ -6,10 +6,13 @@ library webview_flutter;
 
 export 'package:webview_flutter_platform_interface/webview_flutter_platform_interface.dart'
     show
+        JavaScriptAlertDialogRequest,
+        JavaScriptConfirmDialogRequest,
         JavaScriptConsoleMessage,
         JavaScriptLogLevel,
         JavaScriptMessage,
         JavaScriptMode,
+        JavaScriptTextInputDialogRequest,
         LoadRequestMethod,
         NavigationDecision,
         NavigationRequest,
