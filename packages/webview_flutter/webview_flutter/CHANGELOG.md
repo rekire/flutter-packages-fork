@@ -1,3 +1,6 @@
+## 4.4.3
+* Adds support to show JavaScript dialog. See `WebViewController.setOnJavaScriptAlertDialog`, `WebViewController.setOnJavaScriptConfirmDialog` and `WebViewController.setOnJavaScriptTextInputDialog`.
+
 ## NEXT
 
 * Updates minimum supported SDK version to Flutter 3.10/Dart 3.0.
