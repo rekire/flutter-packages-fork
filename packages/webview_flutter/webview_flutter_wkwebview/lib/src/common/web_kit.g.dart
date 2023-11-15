@@ -493,13 +493,17 @@ class WKNavigationActionData {
 class WKFrameInfoData {
   WKFrameInfoData({
     required this.isMainFrame,
+    required this.request,
   });
 
   bool isMainFrame;
 
+  NSUrlRequestData request;
+
   Object encode() {
     return <Object?>[
       isMainFrame,
+      request.encode(),
     ];
   }
 
@@ -507,6 +511,7 @@ class WKFrameInfoData {
     result as List<Object?>;
     return WKFrameInfoData(
       isMainFrame: result[0]! as bool,
+      request: NSUrlRequestData.decode(result[1]! as List<Object?>),
     );
   }
 }

@@ -229,7 +229,7 @@ class WebKitWebViewController extends PlatformWebViewController {
         if (callback != null) {
           final JavaScriptAlertDialogRequest request =
               JavaScriptAlertDialogRequest(
-                  message: message, url: "");
+                  message: message, url: frame.request.url);
           await callback.call(request);
           return;
         }
@@ -240,7 +240,7 @@ class WebKitWebViewController extends PlatformWebViewController {
         if (callback != null) {
           final JavaScriptConfirmDialogRequest request =
               JavaScriptConfirmDialogRequest(
-                  message: message, url: "");
+                  message: message, url: frame.request.url);
           final bool result = await callback.call(request);
           return result;
         }
@@ -254,7 +254,7 @@ class WebKitWebViewController extends PlatformWebViewController {
           final JavaScriptTextInputDialogRequest request =
               JavaScriptTextInputDialogRequest(
                   message: prompt,
-                  url: "",
+                  url: frame.request.url,
                   defaultText: defaultText);
           final String result = await callback.call(request);
           return result;

@@ -204,7 +204,9 @@ void main() {
           WKWebView.detached(),
           const WKNavigationAction(
             request: NSUrlRequest(url: 'https://www.google.com'),
-            targetFrame: WKFrameInfo(isMainFrame: false),
+            targetFrame: WKFrameInfo(
+                isMainFrame: false,
+                request: NSUrlRequest(url: 'https://google.com')),
             navigationType: WKNavigationType.linkActivated,
           ),
         ),

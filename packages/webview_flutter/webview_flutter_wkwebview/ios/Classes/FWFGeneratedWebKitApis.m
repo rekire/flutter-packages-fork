@@ -562,14 +562,17 @@ static id GetNullableObjectAtIndex(NSArray *array, NSInteger key) {
 @end
 
 @implementation FWFWKFrameInfoData
-+ (instancetype)makeWithIsMainFrame:(BOOL )isMainFrame {
++ (instancetype)makeWithIsMainFrame:(BOOL )isMainFrame
+    request:(FWFNSUrlRequestData *)request {
   FWFWKFrameInfoData* pigeonResult = [[FWFWKFrameInfoData alloc] init];
   pigeonResult.isMainFrame = isMainFrame;
+  pigeonResult.request = request;
   return pigeonResult;
 }
 + (FWFWKFrameInfoData *)fromList:(NSArray *)list {
   FWFWKFrameInfoData *pigeonResult = [[FWFWKFrameInfoData alloc] init];
   pigeonResult.isMainFrame = [GetNullableObjectAtIndex(list, 0) boolValue];
+  pigeonResult.request = [FWFNSUrlRequestData nullableFromList:(GetNullableObjectAtIndex(list, 1))];
   return pigeonResult;
 }
 + (nullable FWFWKFrameInfoData *)nullableFromList:(NSArray *)list {
@@ -578,6 +581,7 @@ static id GetNullableObjectAtIndex(NSArray *array, NSInteger key) {
 - (NSArray *)toList {
   return @[
     @(self.isMainFrame),
+    (self.request ? [self.request toList] : [NSNull null]),
   ];
 }
 @end

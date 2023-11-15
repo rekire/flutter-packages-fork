@@ -92,18 +92,18 @@ void main() {
               WKMediaCaptureType type,
             )? requestMediaCapturePermission,
             Future<void> Function(
-                String message,
-                WKFrameInfo frame,
-                )? runJavaScriptAlertDialog,
+              String message,
+              WKFrameInfo frame,
+            )? runJavaScriptAlertDialog,
             Future<bool> Function(
-                String message,
-                WKFrameInfo frame,
-                )? runJavaScriptConfirmDialog,
+              String message,
+              WKFrameInfo frame,
+            )? runJavaScriptConfirmDialog,
             Future<String> Function(
-                String prompt,
-                String defaultText,
-                WKFrameInfo frame,
-                )? runJavaScriptTextInputDialog,
+              String prompt,
+              String defaultText,
+              WKFrameInfo frame,
+            )? runJavaScriptTextInputDialog,
             InstanceManager? instanceManager,
           }) {
             return uiDelegate ??
@@ -111,12 +111,9 @@ void main() {
                     onCreateWebView: onCreateWebView,
                     requestMediaCapturePermission:
                         requestMediaCapturePermission,
-                    runJavaScriptAlertDialog:
-                    runJavaScriptAlertDialog,
-                    runJavaScriptConfirmDialog:
-                        runJavaScriptConfirmDialog,
-                    runJavaScriptTextInputDialog:
-                        runJavaScriptTextInputDialog);
+                    runJavaScriptAlertDialog: runJavaScriptAlertDialog,
+                    runJavaScriptConfirmDialog: runJavaScriptConfirmDialog,
+                    runJavaScriptTextInputDialog: runJavaScriptTextInputDialog);
           },
           createScriptMessageHandler: WKScriptMessageHandler.detached,
         ),
@@ -979,7 +976,9 @@ void main() {
         WKWebViewConfiguration.detached(),
         const WKNavigationAction(
           request: request,
-          targetFrame: WKFrameInfo(isMainFrame: false),
+          targetFrame: WKFrameInfo(
+              isMainFrame: false,
+              request: NSUrlRequest(url: 'https://google.com')),
           navigationType: WKNavigationType.linkActivated,
         ),
       );
@@ -1198,7 +1197,9 @@ void main() {
         CapturingUIDelegate.lastCreatedDelegate,
         WKWebView.detached(),
         const WKSecurityOrigin(host: '', port: 0, protocol: ''),
-        const WKFrameInfo(isMainFrame: false),
+        const WKFrameInfo(
+            isMainFrame: false,
+            request: NSUrlRequest(url: 'https://google.com')),
         WKMediaCaptureType.microphone,
       );
 
