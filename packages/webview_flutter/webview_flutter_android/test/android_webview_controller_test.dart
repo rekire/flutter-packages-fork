@@ -920,6 +920,132 @@ void main() {
       expect(callbackCalled, isFalse);
     });
 
+    group('JavaScript Dialog', () {
+      test('setOnJavaScriptAlertDialog', () async {
+        late final Future<void> Function(String url, String message)
+            onJsAlertCallback;
+
+        final MockWebChromeClient mockWebChromeClient = MockWebChromeClient();
+
+        final AndroidWebViewController controller = createControllerWithMocks(
+          createWebChromeClient: ({
+            dynamic onProgressChanged,
+            dynamic onShowFileChooser,
+            dynamic onGeolocationPermissionsShowPrompt,
+            dynamic onGeolocationPermissionsHidePrompt,
+            dynamic onPermissionRequest,
+            dynamic onShowCustomView,
+            dynamic onHideCustomView,
+            Future<void> Function(String url, String message)? onJsAlert,
+            dynamic onJsConfirm,
+            dynamic onJsPrompt,
+            dynamic onConsoleMessage,
+          }) {
+            onJsAlertCallback = onJsAlert!;
+            return mockWebChromeClient;
+          },
+        );
+
+        late final String message;
+        await controller.setOnJavaScriptAlertDialog(
+            (JavaScriptAlertDialogRequest request) async {
+          message = request.message;
+          return;
+        });
+
+        const String callbackMessage = 'Message';
+        await onJsAlertCallback('', callbackMessage);
+        expect(message, callbackMessage);
+      });
+
+      test('setOnJavaScriptConfirmDialog', () async {
+        late final Future<bool> Function(String url, String message)
+            onJsConfirmCallback;
+
+        final MockWebChromeClient mockWebChromeClient = MockWebChromeClient();
+
+        final AndroidWebViewController controller = createControllerWithMocks(
+          createWebChromeClient: ({
+            dynamic onProgressChanged,
+            dynamic onShowFileChooser,
+            dynamic onGeolocationPermissionsShowPrompt,
+            dynamic onGeolocationPermissionsHidePrompt,
+            dynamic onPermissionRequest,
+            dynamic onShowCustomView,
+            dynamic onHideCustomView,
+            dynamic onJsAlert,
+            Future<bool> Function(String url, String message)? onJsConfirm,
+            dynamic onJsPrompt,
+            dynamic onConsoleMessage,
+          }) {
+            onJsConfirmCallback = onJsConfirm!;
+            return mockWebChromeClient;
+          },
+        );
+
+        late final String message;
+        const bool callbackReturnValue = true;
+        await controller.setOnJavaScriptConfirmDialog(
+            (JavaScriptConfirmDialogRequest request) async {
+          message = request.message;
+          return callbackReturnValue;
+        });
+
+        const String callbackMessage = 'Message';
+        final bool returnValue = await onJsConfirmCallback('', callbackMessage);
+
+        expect(message, callbackMessage);
+        expect(returnValue, callbackReturnValue);
+      });
+
+      test('setOnJavaScriptTextInputDialog', () async {
+        late final Future<String> Function(
+            String url, String message, String defaultValue) onJsPromptCallback;
+        final MockWebChromeClient mockWebChromeClient = MockWebChromeClient();
+
+        final AndroidWebViewController controller = createControllerWithMocks(
+          createWebChromeClient: ({
+            dynamic onProgressChanged,
+            dynamic onShowFileChooser,
+            dynamic onGeolocationPermissionsShowPrompt,
+            dynamic onGeolocationPermissionsHidePrompt,
+            dynamic onPermissionRequest,
+            dynamic onShowCustomView,
+            dynamic onHideCustomView,
+            dynamic onJsAlert,
+            dynamic onJsConfirm,
+            Future<String> Function(
+                    String url, String message, String defaultText)?
+                onJsPrompt,
+            dynamic onConsoleMessage,
+          }) {
+            onJsPromptCallback = onJsPrompt!;
+            return mockWebChromeClient;
+          },
+        );
+
+        late final String message;
+        late final String? defaultText;
+        const String callbackReturnValue = 'Return Value';
+        await controller.setOnJavaScriptTextInputDialog(
+            (JavaScriptTextInputDialogRequest request) async {
+          message = request.message;
+          defaultText = request.defaultText;
+          return callbackReturnValue;
+        });
+
+        const String callbackMessage = 'Message';
+        const String callbackDefaultText = 'Default Text';
+
+        final String returnValue =
+            await onJsPromptCallback('', callbackMessage, callbackDefaultText);
+
+        expect(message, callbackMessage);
+        expect(defaultText, callbackDefaultText);
+        expect(returnValue, callbackReturnValue);
+      });
+    });
+
     test('setOnConsoleLogCallback', () async {
       late final void Function(
         android_webview.WebChromeClient instance,

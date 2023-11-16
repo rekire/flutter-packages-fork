@@ -1209,6 +1209,84 @@ void main() {
       expect(decision, WKPermissionDecision.grant);
     });
 
+    group('JavaScript Dialog', () {
+      test('setOnJavaScriptAlertDialog', () async {
+        final WebKitWebViewController controller = createControllerWithMocks();
+        late final String message;
+        await controller.setOnJavaScriptAlertDialog(
+            (JavaScriptAlertDialogRequest request) async {
+          message = request.message;
+          return;
+        });
+
+        const String callbackMessage = 'Message';
+        final Future<void> Function(String message, WKFrameInfo frame)
+            onJavaScriptAlertDialog =
+            CapturingUIDelegate.lastCreatedDelegate.runJavaScriptAlertDialog!;
+        await onJavaScriptAlertDialog(
+            callbackMessage,
+            const WKFrameInfo(
+                isMainFrame: false,
+                request: NSUrlRequest(url: 'https://google.com')));
+
+        expect(message, callbackMessage);
+      });
+
+      test('setOnJavaScriptConfirmDialog', () async {
+        final WebKitWebViewController controller = createControllerWithMocks();
+        late final String message;
+        const bool callbackReturnValue = true;
+        await controller.setOnJavaScriptConfirmDialog(
+            (JavaScriptConfirmDialogRequest request) async {
+          message = request.message;
+          return callbackReturnValue;
+        });
+
+        const String callbackMessage = 'Message';
+        final Future<bool> Function(String message, WKFrameInfo frame)
+            onJavaScriptConfirmDialog =
+            CapturingUIDelegate.lastCreatedDelegate.runJavaScriptConfirmDialog!;
+        final bool returnValue = await onJavaScriptConfirmDialog(
+            callbackMessage,
+            const WKFrameInfo(
+                isMainFrame: false,
+                request: NSUrlRequest(url: 'https://google.com')));
+
+        expect(message, callbackMessage);
+        expect(returnValue, callbackReturnValue);
+      });
+
+      test('setOnJavaScriptTextInputDialog', () async {
+        final WebKitWebViewController controller = createControllerWithMocks();
+        late final String message;
+        late final String? defaultText;
+        const String callbackReturnValue = 'Return Value';
+        await controller.setOnJavaScriptTextInputDialog(
+            (JavaScriptTextInputDialogRequest request) async {
+          message = request.message;
+          defaultText = request.defaultText;
+          return callbackReturnValue;
+        });
+
+        const String callbackMessage = 'Message';
+        const String callbackDefaultText = 'Default Text';
+        final Future<String> Function(
+                String prompt, String defaultText, WKFrameInfo frame)
+            onJavaScriptTextInputDialog = CapturingUIDelegate
+                .lastCreatedDelegate.runJavaScriptTextInputDialog!;
+        final String returnValue = await onJavaScriptTextInputDialog(
+            callbackMessage,
+            callbackDefaultText,
+            const WKFrameInfo(
+                isMainFrame: false,
+                request: NSUrlRequest(url: 'https://google.com')));
+
+        expect(message, callbackMessage);
+        expect(defaultText, callbackDefaultText);
+        expect(returnValue, callbackReturnValue);
+      });
+    });
+
     test('inspectable', () async {
       final MockWKWebView mockWebView = MockWKWebView();
 
