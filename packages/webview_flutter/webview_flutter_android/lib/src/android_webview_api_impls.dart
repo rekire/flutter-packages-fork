@@ -913,6 +913,7 @@ class WebChromeClientHostApiImpl extends WebChromeClientHostApi {
     );
   }
 
+  /// Helper method to convert instances ids to objects.
   Future<void> setSynchronousReturnValueForOnJsAlertFromInstance(
     WebChromeClient instance,
     bool value,
@@ -921,6 +922,7 @@ class WebChromeClientHostApiImpl extends WebChromeClientHostApi {
         instanceManager.getIdentifier(instance)!, value);
   }
 
+  /// Helper method to convert instances ids to objects.
   Future<void> setSynchronousReturnValueForOnJsConfirmFromInstance(
     WebChromeClient instance,
     bool value,
@@ -929,6 +931,7 @@ class WebChromeClientHostApiImpl extends WebChromeClientHostApi {
         instanceManager.getIdentifier(instance)!, value);
   }
 
+  /// Helper method to convert instances ids to objects.
   Future<void> setSynchronousReturnValueForOnJsPromptFromInstance(
     WebChromeClient instance,
     bool value,
