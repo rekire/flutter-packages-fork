@@ -14,8 +14,7 @@ export 'web_kit_api_impls.dart'
     show
         WKNavigationType,
         WKPermissionDecision,
-        WKMediaCaptureType,
-        WKJavaScriptPanelData;
+        WKMediaCaptureType;
 
 /// Times at which to inject script content into a webpage.
 ///

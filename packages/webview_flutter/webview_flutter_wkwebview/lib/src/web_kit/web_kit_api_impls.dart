@@ -14,8 +14,7 @@ export '../common/web_kit.g.dart'
     show
         WKNavigationType,
         WKPermissionDecision,
-        WKMediaCaptureType,
-        WKJavaScriptPanelData;
+        WKMediaCaptureType;
 
 Iterable<WKWebsiteDataTypeEnumData> _toWKWebsiteDataTypeEnumData(
     Iterable<WKWebsiteDataType> types) {
