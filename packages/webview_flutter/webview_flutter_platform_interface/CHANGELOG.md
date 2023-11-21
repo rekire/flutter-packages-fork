@@ -1,9 +1,7 @@
-## 2.7.0
+## 2.8.0
 
 * Adds support to show JavaScript dialog. See `PlatformWebViewController.setOnJavaScriptAlertDialog`, `PlatformWebViewController.setOnJavaScriptConfirmDialog` and `PlatformWebViewController.setOnJavaScriptTextInputDialog`.
 
-
-## NEXT
 ## 2.7.0
 
 * Adds support for handling HTTP basic authentication requests. See `PlatformNavigationDelegate.setOnHttpAuthRequest`.
