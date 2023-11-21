@@ -143,13 +143,16 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
       returnValueForOnJsPrompt = value;
     }
 
-
     @Override
     public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
-      if( returnValueForOnJsAlert ) {
-        flutterApi.onJsAlert(this, url, message, reply -> {
-          result.confirm();
-        });
+      if (returnValueForOnJsAlert) {
+        flutterApi.onJsAlert(
+            this,
+            url,
+            message,
+            reply -> {
+              result.confirm();
+            });
         return true;
       } else {
         return false;
@@ -158,14 +161,18 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
 
     @Override
     public boolean onJsConfirm(WebView view, String url, String message, JsResult result) {
-      if( returnValueForOnJsConfirm ) {
-        flutterApi.onJsConfirm(this, url, message, reply -> {
-          if(reply) {
-            result.confirm();
-          } else {
-            result.cancel();
-          }
-        });
+      if (returnValueForOnJsConfirm) {
+        flutterApi.onJsConfirm(
+            this,
+            url,
+            message,
+            reply -> {
+              if (reply) {
+                result.confirm();
+              } else {
+                result.cancel();
+              }
+            });
         return true;
       } else {
         return false;
@@ -173,16 +180,22 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
     }
 
     @Override
-    public boolean onJsPrompt(WebView view, String url, String message, String defaultValue, JsPromptResult result) {
-      if( returnValueForOnJsPrompt ) {
-        flutterApi.onJsPrompt(this, url, message, defaultValue, reply -> {
-          @Nullable String inputMessage = reply;
-          if(inputMessage != null) {
-            result.confirm(inputMessage);
-          } else {
-            result.cancel();
-          }
-        });
+    public boolean onJsPrompt(
+        WebView view, String url, String message, String defaultValue, JsPromptResult result) {
+      if (returnValueForOnJsPrompt) {
+        flutterApi.onJsPrompt(
+            this,
+            url,
+            message,
+            defaultValue,
+            reply -> {
+              @Nullable String inputMessage = reply;
+              if (inputMessage != null) {
+                result.confirm(inputMessage);
+              } else {
+                result.cancel();
+              }
+            });
         return true;
       } else {
         return false;
@@ -333,22 +346,26 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
   }
 
   @Override
-  public void setSynchronousReturnValueForOnJsAlert(@NonNull Long instanceId, @NonNull Boolean value) {
+  public void setSynchronousReturnValueForOnJsAlert(
+      @NonNull Long instanceId, @NonNull Boolean value) {
     final WebChromeClientImpl webChromeClient =
-            Objects.requireNonNull(instanceManager.getInstance(instanceId));
+        Objects.requireNonNull(instanceManager.getInstance(instanceId));
     webChromeClient.setReturnValueForOnJsAlert(value);
   }
 
   @Override
-  public void setSynchronousReturnValueForOnJsConfirm(@NonNull Long instanceId, @NonNull Boolean value) {
+  public void setSynchronousReturnValueForOnJsConfirm(
+      @NonNull Long instanceId, @NonNull Boolean value) {
     final WebChromeClientImpl webChromeClient =
-            Objects.requireNonNull(instanceManager.getInstance(instanceId));
+        Objects.requireNonNull(instanceManager.getInstance(instanceId));
     webChromeClient.setReturnValueForOnJsConfirm(value);
   }
+
   @Override
-  public void setSynchronousReturnValueForOnJsPrompt(@NonNull Long instanceId, @NonNull Boolean value) {
+  public void setSynchronousReturnValueForOnJsPrompt(
+      @NonNull Long instanceId, @NonNull Boolean value) {
     final WebChromeClientImpl webChromeClient =
-            Objects.requireNonNull(instanceManager.getInstance(instanceId));
+        Objects.requireNonNull(instanceManager.getInstance(instanceId));
     webChromeClient.setReturnValueForOnJsPrompt(value);
   }
 }

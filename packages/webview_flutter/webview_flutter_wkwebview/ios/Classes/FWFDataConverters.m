@@ -176,8 +176,9 @@ FWFNSUrlRequestData *FWFNSUrlRequestDataFromNativeNSURLRequest(NSURLRequest *req
 }
 
 FWFWKFrameInfoData *FWFWKFrameInfoDataFromNativeWKFrameInfo(WKFrameInfo *info) {
-  return [FWFWKFrameInfoData makeWithIsMainFrame:info.isMainFrame 
-                                         request:FWFNSUrlRequestDataFromNativeNSURLRequest(info.request)];
+  return [FWFWKFrameInfoData
+      makeWithIsMainFrame:info.isMainFrame
+                  request:FWFNSUrlRequestDataFromNativeNSURLRequest(info.request)];
 }
 
 WKNavigationActionPolicy FWFNativeWKNavigationActionPolicyFromEnumData(

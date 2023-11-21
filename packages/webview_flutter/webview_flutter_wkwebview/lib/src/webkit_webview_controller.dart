@@ -247,7 +247,8 @@ class WebKitWebViewController extends PlatformWebViewController {
 
         return false;
       },
-      runJavaScriptTextInputDialog: (String prompt, String defaultText, WKFrameInfo frame) async {
+      runJavaScriptTextInputDialog:
+          (String prompt, String defaultText, WKFrameInfo frame) async {
         final Future<String> Function(JavaScriptTextInputDialogRequest request)?
             callback = weakThis.target?._onJavaScriptTextInputDialog;
         if (callback != null) {

@@ -746,10 +746,10 @@ abstract class WKUIDelegateFlutterApi {
   )
   @async
   void runJavaScriptAlertPanel(
-      int identifier,
-      String message,
-      WKFrameInfoData frame,
-      );
+    int identifier,
+    String message,
+    WKFrameInfoData frame,
+  );
 
   /// Callback to Dart function `WKUIDelegate.runJavaScriptConfirmPanel`.
   @ObjCSelector(
@@ -757,10 +757,10 @@ abstract class WKUIDelegateFlutterApi {
   )
   @async
   bool runJavaScriptConfirmPanel(
-      int identifier,
-      String message,
-      WKFrameInfoData frame,
-      );
+    int identifier,
+    String message,
+    WKFrameInfoData frame,
+  );
 
   /// Callback to Dart function `WKUIDelegate.runJavaScriptTextInputPanel`.
   @ObjCSelector(
@@ -768,11 +768,11 @@ abstract class WKUIDelegateFlutterApi {
   )
   @async
   String runJavaScriptTextInputPanel(
-      int identifier,
-      String prompt,
-      String defaultText,
-      WKFrameInfoData frame,
-      );
+    int identifier,
+    String prompt,
+    String defaultText,
+    WKFrameInfoData frame,
+  );
 }
 
 /// Mirror of WKHttpCookieStore.

@@ -121,11 +121,9 @@ void main() {
                     void Function(android_webview.WebChromeClient instance,
                             android_webview.ConsoleMessage message)?
                         onConsoleMessage,
-                    Future<void> Function(
-                            String url, String message)?
+                    Future<void> Function(String url, String message)?
                         onJsAlert,
-                    Future<bool> Function(
-                            String url, String message)?
+                    Future<bool> Function(String url, String message)?
                         onJsConfirm,
                     Future<String> Function(
                             String url, String message, String defaultValue)?

@@ -89,46 +89,52 @@
                                                   }];
 }
 
-
-- (void)runJavaScriptAlertPanelForDelegateWithIdentifier:(FWFUIDelegate *)instance 
+- (void)runJavaScriptAlertPanelForDelegateWithIdentifier:(FWFUIDelegate *)instance
                                                  message:(NSString *)message
                                                    frame:(WKFrameInfo *)frame
                                        completionHandler:(void (^)(void))completionHandler {
-    [self runJavaScriptAlertPanelForDelegateWithIdentifier:[self identifierForDelegate:instance]
-                                                   message:message
-                                                     frame:FWFWKFrameInfoDataFromNativeWKFrameInfo(frame)
-                                                completion:^(FlutterError * error) {
-        NSAssert(!error, @"%@", error);
-        completionHandler();
-    }];
+  [self runJavaScriptAlertPanelForDelegateWithIdentifier:[self identifierForDelegate:instance]
+                                                 message:message
+                                                   frame:FWFWKFrameInfoDataFromNativeWKFrameInfo(
+                                                             frame)
+                                              completion:^(FlutterError *error) {
+                                                NSAssert(!error, @"%@", error);
+                                                completionHandler();
+                                              }];
 }
 
 - (void)runJavaScriptConfirmPanelForDelegateWithIdentifier:(FWFUIDelegate *)instance
                                                    message:(NSString *)message
                                                      frame:(WKFrameInfo *)frame
                                          completionHandler:(void (^)(BOOL))completionHandler {
-    [self runJavaScriptConfirmPanelForDelegateWithIdentifier:[self identifierForDelegate:instance]
-                                                     message:message
-                                                       frame:FWFWKFrameInfoDataFromNativeWKFrameInfo(frame)
-                                                  completion:^(NSNumber * isConfirmed, FlutterError * error) {
-        NSAssert(!error, @"%@", error);
-        completionHandler(isConfirmed.boolValue);
-    }];
+  [self runJavaScriptConfirmPanelForDelegateWithIdentifier:[self identifierForDelegate:instance]
+                                                   message:message
+                                                     frame:FWFWKFrameInfoDataFromNativeWKFrameInfo(
+                                                               frame)
+                                                completion:^(NSNumber *isConfirmed,
+                                                             FlutterError *error) {
+                                                  NSAssert(!error, @"%@", error);
+                                                  completionHandler(isConfirmed.boolValue);
+                                                }];
 }
 
-- (void)runJavaScriptTextInputPanelForDelegateWithIdentifier:(FWFUIDelegate *)instance 
+- (void)runJavaScriptTextInputPanelForDelegateWithIdentifier:(FWFUIDelegate *)instance
                                                       prompt:(NSString *)prompt
                                                  defaultText:(NSString *)defaultText
                                                        frame:(WKFrameInfo *)frame
-                                           completionHandler:(void (^)(NSString * _Nullable))completionHandler {
-    [self runJavaScriptTextInputPanelForDelegateWithIdentifier:[self identifierForDelegate:instance]
-                                                        prompt:prompt
-                                                   defaultText:defaultText 
-                                                         frame:FWFWKFrameInfoDataFromNativeWKFrameInfo(frame)
-                                                    completion:^(NSString * inputText, FlutterError * error) {
-        NSAssert(!error, @"%@", error);
-        completionHandler(inputText);
-    }];
+                                           completionHandler:
+                                               (void (^)(NSString *_Nullable))completionHandler {
+  [self
+      runJavaScriptTextInputPanelForDelegateWithIdentifier:[self identifierForDelegate:instance]
+                                                    prompt:prompt
+                                               defaultText:defaultText
+                                                     frame:FWFWKFrameInfoDataFromNativeWKFrameInfo(
+                                                               frame)
+                                                completion:^(NSString *inputText,
+                                                             FlutterError *error) {
+                                                  NSAssert(!error, @"%@", error);
+                                                  completionHandler(inputText);
+                                                }];
 }
 
 @end
@@ -175,33 +181,43 @@
                                                   }];
 }
 
-- (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler {
-    
-    [self.UIDelegateAPI runJavaScriptAlertPanelForDelegateWithIdentifier:self
+- (void)webView:(WKWebView *)webView
+    runJavaScriptAlertPanelWithMessage:(NSString *)message
+                      initiatedByFrame:(WKFrameInfo *)frame
+                     completionHandler:(void (^)(void))completionHandler {
+  [self.UIDelegateAPI runJavaScriptAlertPanelForDelegateWithIdentifier:self
+                                                               message:message
+                                                                 frame:frame
+                                                     completionHandler:^{
+                                                       completionHandler();
+                                                     }];
+}
+
+- (void)webView:(WKWebView *)webView
+    runJavaScriptConfirmPanelWithMessage:(NSString *)message
+                        initiatedByFrame:(WKFrameInfo *)frame
+                       completionHandler:(void (^)(BOOL))completionHandler {
+  [self.UIDelegateAPI runJavaScriptConfirmPanelForDelegateWithIdentifier:self
                                                                  message:message
                                                                    frame:frame
-                                                       completionHandler:^{
-        completionHandler();
-    }];
+                                                       completionHandler:^(BOOL isConfirmed) {
+                                                         completionHandler(isConfirmed);
+                                                       }];
 }
 
-- (void)webView:(WKWebView *)webView runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(BOOL))completionHandler {
-    [self.UIDelegateAPI runJavaScriptConfirmPanelForDelegateWithIdentifier:self
-                                                                   message:message
-                                                                     frame:frame
-                                                         completionHandler:^(BOOL isConfirmed) {
-        completionHandler(isConfirmed);
-    }];
-}
-
-- (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * _Nullable))completionHandler {
-    [self.UIDelegateAPI runJavaScriptTextInputPanelForDelegateWithIdentifier:self
-                                                                      prompt:prompt
-                                                                 defaultText:defaultText
-                                                                       frame:frame
-                                                           completionHandler:^(NSString * _Nullable inputMessage) {
-        completionHandler(inputMessage);
-    }];
+- (void)webView:(WKWebView *)webView
+    runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt
+                              defaultText:(NSString *)defaultText
+                         initiatedByFrame:(WKFrameInfo *)frame
+                        completionHandler:(void (^)(NSString *_Nullable))completionHandler {
+  [self.UIDelegateAPI
+      runJavaScriptTextInputPanelForDelegateWithIdentifier:self
+                                                    prompt:prompt
+                                               defaultText:defaultText
+                                                     frame:frame
+                                         completionHandler:^(NSString *_Nullable inputMessage) {
+                                           completionHandler(inputMessage);
+                                         }];
 }
 
 @end

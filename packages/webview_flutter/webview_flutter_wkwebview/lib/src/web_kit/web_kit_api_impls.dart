@@ -11,10 +11,7 @@ import '../foundation/foundation.dart';
 import 'web_kit.dart';
 
 export '../common/web_kit.g.dart'
-    show
-        WKNavigationType,
-        WKPermissionDecision,
-        WKMediaCaptureType;
+    show WKNavigationType, WKPermissionDecision, WKMediaCaptureType;
 
 Iterable<WKWebsiteDataTypeEnumData> _toWKWebsiteDataTypeEnumData(
     Iterable<WKWebsiteDataType> types) {
@@ -182,7 +179,8 @@ extension _NavigationActionDataConverter on WKNavigationActionData {
 
 extension _WKFrameInfoDataConverter on WKFrameInfoData {
   WKFrameInfo toWKFrameInfo() {
-    return WKFrameInfo(isMainFrame: isMainFrame,
+    return WKFrameInfo(
+      isMainFrame: isMainFrame,
       request: request.toNSUrlRequest(),
     );
   }

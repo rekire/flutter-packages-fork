@@ -515,7 +515,7 @@ class SampleMenu extends StatelessWidget {
   Future<void> _onLoadFlutterAssetExample() {
     return webViewController.loadFlutterAsset('assets/www/index.html');
   }
-  
+
   Future<void> _onLoadHtmlStringExample() {
     return webViewController.loadHtmlString(kLocalExamplePage);
   }

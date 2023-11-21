@@ -275,8 +275,7 @@ class AndroidWebViewController extends PlatformWebViewController {
             weakReference.target?._onJavaScriptAlert;
         if (callback != null) {
           final JavaScriptAlertDialogRequest request =
-              JavaScriptAlertDialogRequest(
-                  message: message, url: url);
+              JavaScriptAlertDialogRequest(message: message, url: url);
 
           await callback.call(request);
         }
@@ -290,8 +289,7 @@ class AndroidWebViewController extends PlatformWebViewController {
             weakReference.target?._onJavaScriptConfirm;
         if (callback != null) {
           final JavaScriptConfirmDialogRequest request =
-              JavaScriptConfirmDialogRequest(
-                  message: message, url: url);
+              JavaScriptConfirmDialogRequest(message: message, url: url);
           final bool result = await callback.call(request);
           return result;
         }
@@ -306,9 +304,7 @@ class AndroidWebViewController extends PlatformWebViewController {
         if (callback != null) {
           final JavaScriptTextInputDialogRequest request =
               JavaScriptTextInputDialogRequest(
-                  message: message,
-                  url: url,
-                  defaultText: defaultValue);
+                  message: message, url: url, defaultText: defaultValue);
           final String result = await callback.call(request);
           return result;
         }

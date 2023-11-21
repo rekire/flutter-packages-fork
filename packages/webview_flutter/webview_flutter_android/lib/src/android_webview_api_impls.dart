@@ -12,10 +12,7 @@ import 'android_webview.g.dart';
 import 'instance_manager.dart';
 
 export 'android_webview.g.dart'
-    show
-        ConsoleMessage,
-        ConsoleMessageLevel,
-        FileChooserMode;
+    show ConsoleMessage, ConsoleMessageLevel, FileChooserMode;
 
 /// Converts [WebResourceRequestData] to [WebResourceRequest]
 WebResourceRequest _toWebResourceRequest(WebResourceRequestData data) {

@@ -1149,8 +1149,8 @@ class WebChromeClient extends JavaObject {
 
   /// Notify the host application that the web page wants to display a
   /// JavaScript prompt() dialog.
-  final Future<String> Function(String url, String message, String defaultValue)?
-      onJsPrompt;
+  final Future<String> Function(
+      String url, String message, String defaultValue)? onJsPrompt;
 
   /// Sets the required synchronous return value for the Java method,
   /// `WebChromeClient.onShowFileChooser(...)`.

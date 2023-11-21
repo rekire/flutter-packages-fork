@@ -12,7 +12,6 @@ import android.webkit.PermissionRequest;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import io.flutter.plugin.common.BinaryMessenger;
 import io.flutter.plugins.webviewflutter.GeneratedAndroidWebView.WebChromeClientFlutterApi;
@@ -189,59 +188,53 @@ public class WebChromeClientFlutterApiImpl extends WebChromeClientFlutterApi {
   }
 
   /**
-   * Sends a message to Dart to call `WebChromeClient.onJsAlert` on the Dart object
-   * representing `instance`.
+   * Sends a message to Dart to call `WebChromeClient.onJsAlert` on the Dart object representing
+   * `instance`.
    */
   public void onJsAlert(
-          @NonNull WebChromeClient instance,
-          @NonNull String url,
-          @NonNull String message,
-          @NonNull WebChromeClientFlutterApi.Reply<Void> callback
-            ) {
+      @NonNull WebChromeClient instance,
+      @NonNull String url,
+      @NonNull String message,
+      @NonNull WebChromeClientFlutterApi.Reply<Void> callback) {
     super.onJsAlert(
-            Objects.requireNonNull(instanceManager.getIdentifierForStrongReference(instance)),
-            url,
-            message,
-            callback
-    );
+        Objects.requireNonNull(instanceManager.getIdentifierForStrongReference(instance)),
+        url,
+        message,
+        callback);
   }
 
   /**
-   * Sends a message to Dart to call `WebChromeClient.onJsConfirm` on the Dart object
-   * representing `instance`.
+   * Sends a message to Dart to call `WebChromeClient.onJsConfirm` on the Dart object representing
+   * `instance`.
    */
   public void onJsConfirm(
-          @NonNull WebChromeClient instance,
-          @NonNull String url,
-          @NonNull String message,
-          @NonNull WebChromeClientFlutterApi.Reply<Boolean> callback
-  ) {
+      @NonNull WebChromeClient instance,
+      @NonNull String url,
+      @NonNull String message,
+      @NonNull WebChromeClientFlutterApi.Reply<Boolean> callback) {
     super.onJsConfirm(
-            Objects.requireNonNull(instanceManager.getIdentifierForStrongReference(instance)),
-            url,
-            message,
-            callback
-    );
+        Objects.requireNonNull(instanceManager.getIdentifierForStrongReference(instance)),
+        url,
+        message,
+        callback);
   }
 
   /**
-   * Sends a message to Dart to call `WebChromeClient.onJsPrompt` on the Dart object
-   * representing `instance`.
+   * Sends a message to Dart to call `WebChromeClient.onJsPrompt` on the Dart object representing
+   * `instance`.
    */
   public void onJsPrompt(
-          @NonNull WebChromeClient instance,
-          @NonNull String url,
-          @NonNull String message,
-          @NonNull String defaultValue,
-          @NonNull WebChromeClientFlutterApi.Reply<String> callback
-  ) {
+      @NonNull WebChromeClient instance,
+      @NonNull String url,
+      @NonNull String message,
+      @NonNull String defaultValue,
+      @NonNull WebChromeClientFlutterApi.Reply<String> callback) {
     super.onJsPrompt(
-            Objects.requireNonNull(instanceManager.getIdentifierForStrongReference(instance)),
-            url,
-            message,
-            defaultValue,
-            callback
-    );
+        Objects.requireNonNull(instanceManager.getIdentifierForStrongReference(instance)),
+        url,
+        message,
+        defaultValue,
+        callback);
   }
 
   private long getIdentifierForClient(WebChromeClient webChromeClient) {

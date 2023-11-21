@@ -451,8 +451,7 @@ void main() {
             const PlatformWebViewControllerCreationParams());
 
     expect(
-      () => controller.setOnJavaScriptTextInputDialog(
-          (_) async {
+      () => controller.setOnJavaScriptTextInputDialog((_) async {
         return '';
       }),
       throwsUnimplementedError,
